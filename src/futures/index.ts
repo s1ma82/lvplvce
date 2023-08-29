@@ -1,0 +1,6 @@
+export {default as getImage} from './getImage/getImage'
+export {default as getImageFile} from './getImageFile'
+export {default as googleSearch} from './searchBar/googleSearch'
+export {default as isCmd } from './searchBar/isCmd'
+export {suggs, suggsFilter} from './searchBar/suggs'
+export type {Sugg} from './searchBar/Sugg'

@@ -1,0 +1,33 @@
+{
+  "usesTypeScript": true,
+  "usesCssModule": true,
+  "cssPreprocessor": "scss",
+  "testLibrary": "None",
+  "component": {
+    "ui": {
+      "customTemplates": {
+        "component": "templates/ui/TemplateName.tsx",
+        "style": "templates/ui/styles.module.scss",
+        "test": "templates/ui/props.ts"
+      },
+      "path": "src/ui",
+      "withStyle": true,
+      "withInterface": "",
+      "withTest": true,
+      "withStory": false,
+      "withLazy": false
+    },
+    "default": {
+      "customTemplates": {
+        "component": "templates/ui/TemplateName.tsx",
+        "style": "templates/ui/styles.module.scss"
+      },
+      "path": "src/components",
+      "withStyle": true,
+      "withTest": false,
+      "withStory": false,
+      "withLazy": false
+    }
+  },
+  "usesStyledComponents": true
+}

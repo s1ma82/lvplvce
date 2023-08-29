@@ -1,0 +1,32 @@
+.bookmark{
+    position: relative;
+    background: transparent;
+    color: var(--main-color);
+    width: 48px;
+    height: 48px;
+    padding: 5px;
+    font-size: var(--btn-font-size);
+    border: 2px solid var(--sub-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    
+    &.imageFile{
+        padding: 1px;
+    }
+
+    &_gen{
+        color: var(--caret-color);
+        font-size: 30px;
+        line-height: 100%;
+        text-align: center;
+        .icon{
+            display: block;
+            transform: rotate(180deg);
+        }
+    }
+    &__image{
+        border-radius: 3px;
+        width: 100%;
+        height: 100%;
+    }
+}

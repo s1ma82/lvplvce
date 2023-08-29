@@ -1,0 +1,21 @@
+.bookmarks{
+    &__list{
+        width: 100%;
+        max-width: 500px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        z-index: 2;
+        a, li{
+            .item{
+                &.active{
+                    border-color: var(--caret-color);
+                }
+                &:hover{
+                    border-color: var(--caret-color);
+                }
+            }
+        }
+        
+    }
+}
