@@ -4,17 +4,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Input, Icon } from '@ui'
 import {setDev} from '@redux/actions'
 import { suggs as suggsInit} from '@futures'
-import { Sugg} from '@futures/searchBar/Sugg'
+// import { Sugg} from '@futures/searchBar/Sugg'
 import RootState from '@/types/state'
 
 import useHandleEvents from './useHandleEvents'
 import SuggsList from './SuggsList'
+
+import { SuggsState } from './props'
 import styles from './styles.module.scss'
 
 export default ({ }) => {
     const [value, setValue] = useState('')
     const [activeSugg, setActiveSugg] = useState([1, 1])
-    const [suggs, setSuggs] = useState<[Sugg[], [] | Sugg[]]>([suggsInit, []])
+    const [suggs, setSuggs] = useState<SuggsState>([suggsInit, []])
     const searchBar = useRef<HTMLElement>()
 
     const {dev, modal} = useSelector((state: RootState) => state )

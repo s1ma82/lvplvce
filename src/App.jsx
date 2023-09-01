@@ -17,6 +17,8 @@ const isExtension = () => {
 	store.dispatch(setExtension(proto === 'chrome-extension'))
 }
 
+window.EXTENSION_FILE_LINK = "https://github.com/s1ma82/lvplvce/releases/download/v1.0.0-beta/lvplvce_1.0.0-beta.zip"
+
 function App() {
 	isExtension()
 	return (
