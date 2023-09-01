@@ -17,7 +17,7 @@ const isExtension = () => {
 	store.dispatch(setExtension(proto === 'chrome-extension'))
 }
 
-window.EXTENSION_FILE_LINK = "http://bit.ly/lvplvce"
+window.EXTENSION_FILE_LINK = "https://bit.ly/lvplvce"
 
 function App() {
 	isExtension()
