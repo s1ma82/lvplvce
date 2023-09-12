@@ -29,6 +29,7 @@
       "@futures/*": ["./src/futures/*"],
       "@assets/*": ["./src/assets/*"],
       "@redux/*": ["./src/redux/*"],
+      "@styles/*": ["./src/styles/*"],
     },   
   },
   // "references": [{ "path": "tsconfig.node.json" }],

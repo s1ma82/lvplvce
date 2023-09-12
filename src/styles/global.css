@@ -1,6 +1,18 @@
-@import url('./fonts/fonts.css');
-@import url('normalize.css');
+:root{
 
+    /* // fonts */
+    --default-font: 'Roboto Mono';
+    --logo-font: 'Arkhip';
+    --inconsolata-font: 'Inconsolata'
+
+    /* // fonts-size */
+    --default-font-size: 16px;
+    --btn-font-size: 1.3em;
+
+    /* // border */
+    --border-radius: 6px;
+    
+}
 *{
     box-sizing: border-box;
     user-select: none;
@@ -14,7 +26,7 @@ h1{
     font-size: 27px;
 }
 html{
-    background: var(--sub-alt-color);
+    background: "#171a25";
     color: var(--text-color);
 }
 body{
@@ -75,18 +87,4 @@ a:hover{
 }
 
     
-:root{
 
-    /* // fonts */
-    --default-font: 'Roboto Mono';
-    --logo-font: 'Arkhip';
-    --inconsolata-font: 'Inconsolata'
-
-    /* // fonts-size */
-    --default-font-size: 16px;
-    --btn-font-size: 1.3em;
-
-    /* // border */
-    --border-radius: 6px;
-    
-}

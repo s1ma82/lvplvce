@@ -1,4 +1,4 @@
-const o=`:root {
+:root {
     --bg-color: #0c0d11;
     --main-color: #7ebab5;
     --caret-color: #7ebab5;
@@ -9,4 +9,4 @@ const o=`:root {
     --error-extra-color: #b02a33;
     --colorful-error-color: #ff4754;
     --colorful-error-extra-color: #b02a33
-}`;export{o as default};
+}

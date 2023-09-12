@@ -20,6 +20,7 @@ export default defineConfig({
       '@futures': path.resolve(__dirname, './src/futures'),
       '@assets': path.resolve(__dirname, './src/assets'),
       '@redux': path.resolve(__dirname, './src/redux'),
+      '@styles': path.resolve(__dirname, './src/styles'),
     }
   },
   server: {
