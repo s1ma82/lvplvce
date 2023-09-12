@@ -15,11 +15,13 @@
   - работой с закладками и микросервисами*
   - интуетивной схемой кастомизации
   - API*, для создания кастомного функционала  
-- Продукт для обычных и продвинутых пользователей  
+- Продукт для обычных и продвинутых пользователей 
+ 
 <span style="color: #ffffff80">
 * звёздочкой помечен не реализованный функционал
 </span>
 
+<img align="center" width="100%" src="public/lvplvce-screen.png"/>
 
 
 ## Установка (Installing): 
@@ -37,3 +39,7 @@
 <img align="center" width="100%" src="https://soft-click.ru/wp-content/uploads/2020/03/perenos-rasshireniy-google-chrome-s-pomoschyu-rezhima-razrabotchika12.jpg"/>
 
 3 После этого установите распакованное расширение.
+
+
+
+
