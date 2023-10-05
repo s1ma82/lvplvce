@@ -115,18 +115,22 @@ export default function useHandleEvents(eventData: EventData) {
             }
             
             const modMenuTrigger = getTrigger()
+            if (modMenuTrigger.value) e.preventDefault()
             const click = modMenuTrigger.type === 'click'
             if(!modal.status) searchBar.current?.focus()
             if (!click && !modMenuTrigger.value) return
-
             if (
                 click && !modMenuTrigger.value ||
                 !click && dev.devMode && !dev.extra
-            ) return dispatch(setDev(false))
+            ) {
+                // e.preventDefault()
+                return dispatch(setDev(false))
+            }
             
             
             if (!dev.devMode && !modal.status && !click || dev.extra && !click) {
                 if (dev.extra && !click) setValue('')
+                // e.preventDefault()
                 return dispatch(setDev({ devMode: true, extra: false }))
             }
             

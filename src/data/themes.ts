@@ -3,5 +3,6 @@ export const themes: string[] = [
     'bento',
     'carbon',
     'trance',
-    'bingsu'
+    'bingsu', 
+    'laser'
 ]

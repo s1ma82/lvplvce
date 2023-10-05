@@ -1,5 +1,5 @@
 import { ReactComponent as Pentagram } from '@assets/pentagram.svg'
-import { Bookmarks, SearchBar, DisplayedLink, AuthorLink, DownloadExtension } from '@components'
+import { Bookmarks, SearchBar, DisplayedLink, DownloadExtension, Footer } from '@components'
 
 export default () => {
 
@@ -13,8 +13,7 @@ export default () => {
 
 			<Bookmarks />
 			
-			<AuthorLink />
-			
+			<Footer/>
 			<DownloadExtension/>
 
 			<DisplayedLink/>
