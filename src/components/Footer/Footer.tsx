@@ -10,10 +10,7 @@ export default () => {
                     command menu - <b>Esc</b> or <b>Ctrl + Shift + P</b>
                 </div>
                 <div>
-                    change bookmark - <b>&#8592;</b> or <b>&#8594;</b>
-                </div>
-                <div>
-                    enter bookmark - <b>Ctrl + Enter</b>
+                    change bookmark - <b>&#8592;</b> or <b>&#8594;</b> | enter bookmark - <b>Ctrl + Enter</b>
                 </div>
             </span>
         </footer>
