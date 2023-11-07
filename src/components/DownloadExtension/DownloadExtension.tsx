@@ -6,7 +6,7 @@ import { useState } from 'react'
 
 export default () => {
     const [state, setState] = useState(true)
-    const {extension} = useSelector((state: RootState) => state)
+    const extension = useSelector((state: RootState) => state.extension)
     return !extension ? (
         <a  
             title={state ? 'хочешь узнать как установить? ткни ПКМ' : 'хочешь скачать? тоже ткни ПКМ'}

@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { Provider } from 'react-redux'
-
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import { Theme } from '@components'
 
 import {store} from './redux/store'
@@ -22,8 +22,6 @@ function App() {
 	useEffect(() => {
 		
 		(async () => {
-			await import('normalize.css')
-			
 			await import('./styles/global.css')
 		})().then(() => {
 			document.body.hidden = false

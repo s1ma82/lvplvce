@@ -8,9 +8,11 @@ import { SugExtra, SuggsListProps } from './props'
 
 
 import styles from './styles.module.scss'
+import { useEffect } from 'react'
 
 export default ({ suggs, activeSugg, setActiveSugg, commandHandler}: SuggsListProps) => {
-    const { dev, customStyles } = useSelector((state: RootState) => state)
+    const dev = useSelector((state: RootState) => state.dev)
+    const customStyles  = useSelector((state: RootState) => state.customStyles)
     const getMark = (name: string | number, sugg: Sugg) => {
         if(!sugg) return
         switch (sugg.category) {
@@ -43,7 +45,6 @@ export default ({ suggs, activeSugg, setActiveSugg, commandHandler}: SuggsListPr
     }
     
     const SugExtraMap = () => suggs[1].map((extra, index) => {
-        // console.log(extra)
         return <SugExtra
             key={extra.name + index}
             {...{ extra, index, sugg: suggs[0][activeSugg[0] - 1] }}
@@ -78,18 +79,20 @@ export default ({ suggs, activeSugg, setActiveSugg, commandHandler}: SuggsListPr
             <ul
                 key="suggsList"
                 id="suggsList"
-                hidden={dev.extra}
-                className={styles.suggestions}
+                className={[
+                    styles.suggestions,
+                    !dev.extra ? styles.suggestions_active : ''
+                ].join(' ')}
             >
                 <SugMap/>   
             </ul>
             <ul
                 id="suggsExtraList"
                 key="suggsExtraList"
-                hidden={!dev.extra}
                 className={[
                     styles.suggestions,
-                    styles.extra
+                    styles.extra, 
+                    dev.extra ? styles.suggestions_active : ''
                 ].join(' ')}
             >
                 <SugExtraMap/>

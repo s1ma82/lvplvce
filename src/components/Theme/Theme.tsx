@@ -4,7 +4,7 @@ import RootState from '@/types/state'
 // import '@styles/themes/arch.css'
 
 export default () => {
-    const {customStyles} =  useSelector((state: RootState) => state)
+    const customStyles =  useSelector((state: RootState) => state.customStyles)
 
 	
 	const theme = customStyles.theme

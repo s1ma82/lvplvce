@@ -14,6 +14,9 @@ import styles from './styles.module.scss'
 
 
 export default () => {
+    const modal  = useSelector((state: RootState) => state.modal)
+    const bookmarks = useSelector((state: RootState) => state.bookmarks)
+    
     const dispatch = useDispatch()
     const [url, setUrl] = useState('')
     const [imageUrl, setImageUrl] = useState('')
@@ -29,7 +32,6 @@ export default () => {
 
     const ref = useRef<HTMLElement>(null) 
 
-    const {modal, bookmarks} = useSelector((state: RootState) => state)
 
     const editableBookmark = bookmarks.find(i => i.url === modal.data)
 

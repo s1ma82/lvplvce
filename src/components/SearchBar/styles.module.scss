@@ -51,8 +51,11 @@
 }
 
 .suggestions{
-    display: flex;
+    display: none;
     flex-direction: column;
+    &_active{
+        display: flex;
+    }
 
     .item{
         font-size: .95em;

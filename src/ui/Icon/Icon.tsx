@@ -1,6 +1,6 @@
 import { enigmaIcons  } from './enigmaIcons'
 import {Props} from './props'
-import 'bootstrap-icons/font/bootstrap-icons.css'
+
 export default ({ name = 'code-slash', size = 'inherit', color = 'inherit', ...props } : Props) => {
     
     return (

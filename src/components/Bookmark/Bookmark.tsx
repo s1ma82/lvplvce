@@ -5,7 +5,7 @@ import Props from './props'
 import styles from './styles.module.scss'
 
 export default ({ data, gen = false, className }: Props) => {
-    const { customStyles } = useSelector((state: RootState) => state)
+    const customStyles = useSelector((state: RootState) => state.customStyles)
     
     if (!data && gen) {
         return (
@@ -31,14 +31,14 @@ export default ({ data, gen = false, className }: Props) => {
         return ''
     }
     return (
-        <div
+        <div  
             className={[
                 styles.bookmark,
                 styles[`bookmark_${customStyles.bookmarkSize}`],
                 data?.imageFile.url || data?.imageUrl ? styles.imageFile : '',
                 className
             ].join(' ')}
-        >
+        >   
             <img src={getImageUrl()} className={styles.bookmark__image} />
         </div>
     )

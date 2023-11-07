@@ -8,11 +8,13 @@ import RootState from '@/types/state'
 
 import { BookmarkList } from './BookmarksList'
 import styles from './styles.module.scss'
+import { Reorder } from 'framer-motion'
 
 export default () => {
 
     const [activeMark, setActiveMark] = useState(0)
-    const {bookmarks, dev} = useSelector((state: RootState) => state)
+    const dev = useSelector((state: RootState) => state.dev)
+    const bookmarks = useSelector((state: RootState) => state.bookmarks)
     const dispatch = useDispatch()
     
     function activate(e: SyntheticEvent) {
@@ -21,11 +23,11 @@ export default () => {
         }
     }
 
-    function getMarkUrl (marks: NodeListOf<Element>): string{
+    function getMarkUrl(marks: NodeListOf<Element>): string{
+        
         if (activeMark === 0 || activeMark === bookmarks.length + 1) return ''
         const activeLink = marks[activeMark - 1]
-        const url = activeLink.getAttribute('href')
-
+        const url = activeLink.getAttribute('data-url')
         if (!url) return ''
 
         return url
@@ -33,7 +35,6 @@ export default () => {
 
     useEffect(() => {
         const marks = document.querySelectorAll(`[data-context="bookmark"]`)
-        
         dispatch(setDisplayedLink(getMarkUrl(marks)))
         const event = (e: KeyboardEvent) => {
             
@@ -47,7 +48,7 @@ export default () => {
                 return
             }
             if (key === 'Delete' && !dev.devMode) {
-                dispatch(removeBookmark(marks[activeMark - 1].getAttribute('href')))
+                dispatch(removeBookmark(marks[activeMark - 1].getAttribute('data-url')))
                 return
             }
 
@@ -75,37 +76,25 @@ export default () => {
 
 
     return (
-        <DragDropContext onDragEnd={e => {
-            dispatch(moveBookmark(e))
-        }}>
-            <Droppable
-                direction='horizontal'
-                droppableId='BOOKMARKS'
+        <Reorder.Group
+            axis='x'
+            as="ul"
+            values={bookmarks}
+            onReorder={(e) => console.log(e)}
+            className={styles.bookmarks__list}>
+            <BookmarkList list={bookmarks} activeMark={activeMark} />
+            <li
+                tabIndex={-1}
+                onClick={activate}
             >
-                {provided => (
-                    <ul
-                        ref={provided.innerRef}
-                        className={styles.bookmarks__list}
-                        {...provided.droppableProps}
-                    >
-                        <BookmarkList list={bookmarks} activeMark={activeMark} />
-                        {provided.placeholder}
-                        <li
-                            tabIndex={-1}
-                            onClick={activate}
-                        >
-                            <Bookmark
-                                gen    
-                                className={[
-                                    styles.item,
-                                    activeMark  === bookmarks.length + 1 ? styles.active : ''
-                                ].join(' ')}
-                            />
-                        </li>    
-                    </ul>
-                )}
-
-            </Droppable>
-        </DragDropContext>
+                <Bookmark
+                    gen    
+                    className={[
+                        styles.item,
+                        activeMark  === bookmarks.length + 1 ? styles.active : ''
+                    ].join(' ')}
+                />
+            </li>
+        </Reorder.Group>
     )
 }

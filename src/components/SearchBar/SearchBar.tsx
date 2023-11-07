@@ -19,7 +19,8 @@ export default ({ }) => {
     const [suggs, setSuggs] = useState<SuggsState>([suggsInit, []])
     const searchBar = useRef<HTMLElement>()
 
-    const {dev, modal} = useSelector((state: RootState) => state )
+    const dev = useSelector((state: RootState) => state.dev )
+    const modal = useSelector((state: RootState) =>  state.modal )
     const dispatch = useDispatch()
 
 

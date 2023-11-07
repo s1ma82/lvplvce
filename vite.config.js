@@ -3,10 +3,20 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
 import alias from '@rollup/plugin-alias'
-
+import ViteImagemin from 'vite-plugin-imagemin'
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), svgr(), alias()],
+  build: {
+    minify: 'terser',
+    brotliSize: true,
+
+  },
+  plugins: [
+    react(),
+    svgr(),
+    alias(),
+    ViteImagemin(),
+  ],
   esbuild: {
     jsxFactory: 'h',
     jsxFragment: 'Fragment'
