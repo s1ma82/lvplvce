@@ -21,7 +21,7 @@
 * звёздочкой помечен не реализованный функционал
 </span>
 
-<img align="center" width="100%" src="src/assets/publiclvplvce-screen.png"/>
+<img align="center" width="100%" src="src/assets/lvplvce-screen.png"/>
 
 
 ## Установка (Installing): 
