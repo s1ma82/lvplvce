@@ -16,7 +16,6 @@ export default () => {
             }}
             onClick={() => {
                 setTimeout(() => setState(!state), 1000)
-                 
             }}    
             href={state ? window.EXTENSION_FILE_LINK : 'https://github.com/s1ma82/lvplvce'}
             download={state}

@@ -14,7 +14,7 @@ const isExtension = () => {
 	store.dispatch(setExtension(proto === 'chrome-extension'))
 }
 
-window.EXTENSION_FILE_LINK = "https://bit.ly/lvplvce"
+window.EXTENSION_FILE_LINK = "https://github.com/s1ma82/lvplvce/releases"
 
 const ModalWindow = React.lazy(() => import("./components/ModalWindow/ModalWindow.tsx"))
 const ContextMenu = React.lazy(() => import("./components/ContextMenu/ContextMenu.tsx"))
