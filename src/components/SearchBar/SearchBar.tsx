@@ -2,13 +2,12 @@ import { useEffect, useState, useRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Input, Icon } from '@ui'
-import {setDev} from '@redux/actions'
+import {setDev, setStyle} from '@redux/actions'
 import { suggs as suggsInit} from '@futures'
-// import { Sugg} from '@futures/searchBar/Sugg'
 import RootState from '@/types/state'
 
 import useHandleEvents from './useHandleEvents'
-import SuggsList from './SuggsList'
+import DevMenu from './DevMenu'
 
 import { SuggsState } from './props'
 import styles from './styles.module.scss'
@@ -41,15 +40,10 @@ export default ({ }) => {
         focusBarEvent,
         commandHandler,
         toggleModMenu,
-        modMemuNavigation
+        modMemuNavigation,
+        setCustomStyle
     } = useHandleEvents(eventData)
     
-    useEffect(() => {
-        // chrome.tabs.executeScript({
-        //     code: `document.querySelector(${styles.searchBar}).focus();`
-        // });
-        
-    }, [])
     useEffect(() => {
         if (!dev.devMode) return
         
@@ -91,6 +85,7 @@ export default ({ }) => {
     // input_value handler
 
     useEffect(() => {
+        setValue('')
         toggleModMenu.add()
         if(!dev.devMode) setActiveSugg([1, 1])
         return () => toggleModMenu.remove()
@@ -112,31 +107,39 @@ export default ({ }) => {
             onSubmit={handleSubmit}
         >
             <div id="content" className={styles.content}>
-                <div className={styles.input_container}>
-                    {dev.devMode ? <Icon name="search"/> : null}
+                <div className={[
+                    styles.input_container,
+                    !dev.custom ? styles.noborder : ''
+                ].join(' ')}>
+                    {dev.devMode && !dev.custom ? <Icon name="search" /> : null}
                     <Input
                         ref={searchBar}
                         onKeyDown={breakArrows}
-                        onChange={(e: any) => setValue(e.target.value)}
-                        className={styles.searchBar}
+                        onChange={(e) => {
+                            setValue(e.target.value)
+                            if(dev.custom) return setCustomStyle(e)
+                        }}
+                        className={[
+                            styles.searchBar,
+                        ].join(' ')}
                         id="searchBar"
                         value={value}
                         autoFocus
 		            	autoComplete="off"
 		            	name="searchBar"
-		            	placeholder="any desire"
+		            	placeholder={dev.custom || "any desire"}
 		            	type="text"
                     />
                 </div>
-                <SuggsList
+                <DevMenu
                     {...{ value, suggs, setSuggs, activeSugg, setActiveSugg, commandHandler }} />
             </div>
         </form>
         <div
-            className={`
-                ${styles.devMode_placeholder} 
-                ${dev.devMode ? styles.active : ''}
-            `}
+            className={[
+                styles.devMode_placeholder,
+                dev.devMode ? styles.active : '',
+            ].join(' ')}
         />
     </>)  
 }

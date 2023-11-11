@@ -1,7 +1,10 @@
 import { FormEvent } from 'react';
+import isUrl from 'is-url';
+
 import { store } from '@redux/store' 
-import {setDev} from '@redux/actions'
-import { googleSearch,} from '@futures'
+import {setDev, setStyle} from '@redux/actions'
+import { googleSearch, ucFirst } from '@futures'
+
 import { EventData } from "./props"
 import styles from './styles.module.scss'
 
@@ -17,7 +20,19 @@ export default function useHandleEvents(eventData: EventData) {
         suggs,
         setActiveSugg
     } = eventData
+
     
+
+    function setCustomStyle(event: React.ChangeEvent<HTMLInputElement>) {
+        const value = event.target.value
+        const key = 'custom' + ucFirst((dev.custom.split(' ')[1]))
+        if (key === 'customBackground') {
+            if (dev.custom.length === 0 && !isUrl(value)) return  
+            if (dev.custom.length !== 0 && !isUrl(value)) return dispatch(setStyle([key, '']))
+        }
+        const newStyle = [key, value]
+        dispatch(setStyle(newStyle))
+    }
 
     function getSugg() {
         if (dev.extra) {
@@ -52,7 +67,7 @@ export default function useHandleEvents(eventData: EventData) {
     
     const focusBarEvent = {
         event: (e: KeyboardEvent) => {
-            if (e.key === 'Tab' && !modal.status) {
+            if (e.key === 'Escape' || e.key === 'Tab' && !modal.status) {
                 e.preventDefault()
                 if (!searchBar.current) return
                 setValue('')
@@ -151,6 +166,7 @@ export default function useHandleEvents(eventData: EventData) {
         breakArrows,
         focusBarEvent,
         commandHandler,
-        modMemuNavigation
+        modMemuNavigation,
+        setCustomStyle
     }   
 }

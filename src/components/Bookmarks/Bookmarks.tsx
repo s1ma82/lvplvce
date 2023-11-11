@@ -92,14 +92,14 @@ export default () => {
                     </ul>
                 )}
             </Droppable>
-                <Bookmark
-                    gen    
-                    onClick={activate}
-                    className={[
-                        styles.item,
-                        activeMark  === bookmarks.length + 1 ? styles.active : ''
-                    ].join(' ')}
-                />
+            <Bookmark
+                gen    
+                onClick={activate}
+                className={[
+                    styles.item,
+                    activeMark  === bookmarks.length + 1 ? styles.active : ''
+                ].join(' ')}
+            />
         </DragDropContext>
     )
 }

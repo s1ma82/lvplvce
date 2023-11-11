@@ -1,30 +1,29 @@
-.footer{
-    position: fixed;
-    width: 100%;
-    height: 50px;
+.docs{
+    position: absolute;
+    width: 70%;
+    left: 50%;
     bottom: 0;
-    left: 0;
+    padding: 10px;
+    
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 20px;
 
-    .docs{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        color: var(--sub-color);
-        font-size: .85rem;
-        position: absolute;
-        width: fit-content;
-        bottom: 0;
-        left: 50%;
-        transform: translate(-50%);
-        padding: 10px;
-        &.hidden{
-            opacity: 0;
-            transition: .3s;
-        }
-        div{
-            text-align: center;
-            padding: 5px;
-        };
+    color: var(--sub-color);
+    font-size: .85rem;
+    pointer-events: none;
+    opacity: .7;
 
+    transform: translate(-50%);
+    z-index: 100;
+    &.hidden{
+        opacity: 0;
+        transition: .3s;
     }
+    div{
+        text-align: center;
+        padding: 5px;
+    };
+
 }

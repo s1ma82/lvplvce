@@ -1,5 +1,6 @@
 type DevTypes = {
     devMode: boolean,
-    extra: boolean
+    extra: string,
+    custom: string
 }
 export default DevTypes

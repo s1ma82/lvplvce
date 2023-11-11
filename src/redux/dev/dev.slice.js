@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     devMode: false,
-    extra: false
+    extra: false,
+    custom: false
 }
 
 export const dev = createSlice({
@@ -10,10 +11,9 @@ export const dev = createSlice({
     initialState,
     reducers: {
         setDev: (state, { payload }) => {
-            if(typeof payload === 'boolean' && !payload) return initialState
-            // const { devMode, extra } = payload
+            if (typeof payload === 'boolean' && !payload) return initialState
+            console.log(payload)
             return payload
-
 
         }
     }

@@ -1,8 +1,8 @@
 import { setModalActive, setDev, setStyle } from '@redux/actions';
 import { Dispatch } from "@reduxjs/toolkit"
 import { store } from '@redux/store'
-import { themes, bookmarkSizes } from '@/data';
-import {Sugg} from './Sugg';
+import { themes, bookmarkSizes } from '@assets';
+import {Sugg} from '@/types/Sugg';
 
 const dispatch: Dispatch = store.dispatch
 
@@ -14,11 +14,20 @@ export function suggsFilter(value: string, state: Sugg[]) {
 function extraCommand(this: Sugg) {
     const newDev = {
         devMode: true,
-        extra: this.name
+        extra: this.name,
+        custom: false
     }
     dispatch(setDev(newDev))
 }
 
+function customCommand(this: Sugg) {
+    const newDev = {
+        devMode: true,
+        extra: false,
+        custom: this.name
+    }
+    dispatch(setDev(newDev))
+}
 
 function changeTheme(this: Sugg) {
     dispatch(setStyle(['theme', this.name]))
@@ -50,7 +59,14 @@ export const suggs: Sugg[] =  [
             name: i,
             command: changeBookmarksSize
         }))
-    }, 
+    },
+    {
+        name: 'Custom background',
+        icon: 'image',
+        category: 'styles',
+        command: customCommand,
+        extra: null
+    },
     {
         name: 'Add bookmark',
         icon: 'code-slash',

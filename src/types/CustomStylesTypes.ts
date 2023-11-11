@@ -1,11 +1,10 @@
-const ThemesArr = <const>['arch', '8008', 'aether', 'dracula'] 
-      
-type Themes = typeof ThemesArr[number]
-    
+import { themes } from "@assets/themes"
+
 type CustomStylesTypes = {
-    theme: Themes,
-    fontSize: number,
-    bookmarkSize: number,
+    theme: typeof themes[number],
+    fontSize: string | number,
+    bookmarkSize: string,
+    customBackground: string 
 }
 
 export default CustomStylesTypes

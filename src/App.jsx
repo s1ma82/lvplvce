@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { Provider } from 'react-redux'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import { Theme } from '@components'
+import { CustomStyles } from '@components'
 
 import {store} from './redux/store'
 import Main from './pages/Main.page'
@@ -31,7 +31,7 @@ function App() {
 	isExtension()
 	return (
 		<Provider store={store}>
-			<Theme/>
+			<CustomStyles/>
 			<Main />
 			<ModalWindow/>
 			<ContextMenu/>

@@ -6,6 +6,7 @@
     margin-bottom: 10px;
     z-index: 10;
     transition: none;
+
     &.devMode{
         backdrop-filter: blur(.2rem);
         width: 100%;
@@ -24,9 +25,13 @@
             align-items: center;
             background: var(--sub-alt-color);
             border-radius: var(--border-radius);
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
             padding: 0 10px;
+
+            &.noborder{
+
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
         }
 
         .searchBar{

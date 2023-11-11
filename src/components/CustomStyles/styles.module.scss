@@ -1,0 +1,14 @@
+#customBackground{
+    align-items: center;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    content: "";
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: -999
+}

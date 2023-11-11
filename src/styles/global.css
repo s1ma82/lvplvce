@@ -30,7 +30,8 @@ html{
     color: var(--text-color);
 }
 body{
-    overflow-x: hidden;
+    margin: 0;
+    overflow: hidden;
     padding: 15px;
     font-size: var(--default-font-size);
     font-family: var(--default-font);
@@ -63,9 +64,9 @@ a:hover{
     gap: 10px;
     
 }
-.container>:last-child{
+/* .container>:last-child{
     margin-bottom: 150px;
-}
+} */
 
 
 #logo{

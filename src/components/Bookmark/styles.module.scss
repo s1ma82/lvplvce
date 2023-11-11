@@ -39,6 +39,7 @@
         color: var(--caret-color);
         line-height: 100%;
         text-align: center;
+        z-index: 1;
         .icon{
             display: block;
             transform: rotate(180deg);

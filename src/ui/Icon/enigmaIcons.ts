@@ -13,7 +13,8 @@ export const enigmaIcons = {
     "x-lg": "bi bi-x-lg",
     "search": "bi bi-search",
     "globe": "bi bi-globe",
-    "download": "bi bi-download"
+    "download": "bi bi-download",
+    "image": "bi bi-image"
 }
 
 export type enigmaIconsTypes = keyof typeof enigmaIcons

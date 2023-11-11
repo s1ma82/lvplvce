@@ -7,14 +7,12 @@ export default () => {
     useEffect(() => {
         setTimeout(() => {
             setState(1)
-            setTimeout(() => setState(2), 1000)
         }, 3000)
     }, [])
     return (
-        <footer className={styles.footer}>
+        <>
             <AuthorLink />
-            <span
-                style={{display: state === 2 ? 'none' : ''}}
+            <div
                 className={[
                     styles.docs,
                     state === 1 ? styles.hidden : ''
@@ -24,12 +22,15 @@ export default () => {
                     command menu <br/><b>Esc</b> or <b>Ctrl + Shift + P</b>
                 </div>
                 <div>
-                    change bookmark <br/><b>&#8592;</b> or <b>&#8594;</b>
+                    change bookmark <br/>
+                    <b className={styles.arrow}>&#8656;</b>
+                    {' or '}
+                    <b className={styles.arrow}>&#8658;</b>
                 </div>
                 <div >
-                    enter bookmark  <br/><b>Ctrl + Enter</b>
+                    enter bookmark <br /><b>Ctrl + Enter</b>
                 </div>
-            </span>
-        </footer>
+            </div>
+        </>
     ) 
 }

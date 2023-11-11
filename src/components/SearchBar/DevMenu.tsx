@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 
-import {Sugg} from '@futures/searchBar/Sugg'
+import {Sugg} from '@/types/Sugg'
 import RootState from '@/types/state'
 import { Icon } from '@ui'
 
@@ -8,11 +8,13 @@ import { SugExtra, SuggsListProps } from './props'
 
 
 import styles from './styles.module.scss'
-import { useEffect } from 'react'
 
-export default ({ suggs, activeSugg, setActiveSugg, commandHandler}: SuggsListProps) => {
+export default ({ suggs, activeSugg, setActiveSugg, commandHandler }: SuggsListProps) => {
+    
     const dev = useSelector((state: RootState) => state.dev)
-    const customStyles  = useSelector((state: RootState) => state.customStyles)
+    const customStyles = useSelector((state: RootState) => state.customStyles)
+    
+    // FUNCTIONS
     const getMark = (name: string | number, sugg: Sugg) => {
         if(!sugg) return
         switch (sugg.category) {
@@ -23,6 +25,7 @@ export default ({ suggs, activeSugg, setActiveSugg, commandHandler}: SuggsListPr
         }
     }
 
+    // COMPONENTS
     const SugExtra = ({ extra, index, sugg }: SugExtra) => {
         const mark = getMark(extra.name, sugg)
         return (
@@ -44,37 +47,38 @@ export default ({ suggs, activeSugg, setActiveSugg, commandHandler}: SuggsListPr
         )
     }
     
-    const SugExtraMap = () => suggs[1].map((extra, index) => {
+    const SuggExtraMap = () => suggs[1].map((extra, index) => {
         return <SugExtra
             key={extra.name + index}
             {...{ extra, index, sugg: suggs[0][activeSugg[0] - 1] }}
         />
     })
 
-    const SugMap = () => suggs[0].map((sug: Sugg, index: number) => (
+    const SuggMap = () => suggs[0].map((sugg: Sugg, index: number) => (
             <li
                 onMouseMove={() => {
                     if(activeSugg[0] === index + 1) return
                     setActiveSugg([index + 1, activeSugg[1]])
                 }}
                 onClick={() => commandHandler()}
-                key={`${sug.name}#${index}`}
+                key={`${sugg.name}#${index}`}
                 className={[
                     styles.item,
                     index + 1 === activeSugg[0] ? styles.active : ''
                 ].join(' ')}
             >
-                <Icon name={sug.icon} />
-                {sug.name}{sug.extra ? '..' : ''}
+                <Icon name={sugg.icon} />
+                {sugg.name}{sugg.extra ? '..' : ''}
             </li>
-        ))
+    ))
     
+    // RENDER
     return (
         <div
-            className={`
-                ${styles.suggestions_container}
-                ${dev.devMode ? styles.active : ''}
-            `}
+            className={[
+                styles.suggestions_container,
+                dev.devMode && !dev.custom ? styles.active : ''
+            ].join(' ')}
         >
             <ul
                 key="suggsList"
@@ -84,7 +88,7 @@ export default ({ suggs, activeSugg, setActiveSugg, commandHandler}: SuggsListPr
                     !dev.extra ? styles.suggestions_active : ''
                 ].join(' ')}
             >
-                <SugMap/>   
+                <SuggMap/>   
             </ul>
             <ul
                 id="suggsExtraList"
@@ -95,7 +99,7 @@ export default ({ suggs, activeSugg, setActiveSugg, commandHandler}: SuggsListPr
                     dev.extra ? styles.suggestions_active : ''
                 ].join(' ')}
             >
-                <SugExtraMap/>
+                <SuggExtraMap/>
             </ul>
         </div>
     )

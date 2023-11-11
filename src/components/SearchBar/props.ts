@@ -1,5 +1,5 @@
 import RootState from '@/types/state';
-import { Sugg } from '@/futures';
+import { Sugg } from '@/types/Sugg';
 import { SetStateAction } from 'react';
 export type SuggsState = [Sugg[], [] | Sugg[]]
 export type EventData = {
