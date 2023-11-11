@@ -56,10 +56,10 @@ export default () => {
 		<div
 			id="context-menu"
 			ref={ref}
-			className={`
-				${styles.contextMenu}
-				${focus ? styles.active : ''}
-			`}
+			className={[
+				styles.contextMenu,
+				focus ? styles.active : ''
+			].join(' ')}
 		>	
 			{data ? getName() : null}
 			<ul className={styles.list}>

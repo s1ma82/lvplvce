@@ -16,6 +16,7 @@
     border: 2px solid var(--sub-color);
     border-radius: var(--border-radius);
     cursor: pointer;
+    margin: 0 5px;
     @include size(1);
 
     &_normal{

@@ -1,14 +1,13 @@
 import { SyntheticEvent, useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
-import { Bookmark } from '@components'
-import { setModalActive, moveBookmark, removeBookmark, setDisplayedLink } from '@redux/actions'
 import RootState from '@/types/state'
+import { setModalActive, moveBookmark, removeBookmark, setDisplayedLink } from '@redux/actions'
+import { Bookmark } from '@components'
 
 import { BookmarkList } from './BookmarksList'
 import styles from './styles.module.scss'
-import { Reorder } from 'framer-motion'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
 export default () => {
 
@@ -27,7 +26,7 @@ export default () => {
         
         if (activeMark === 0 || activeMark === bookmarks.length + 1) return ''
         const activeLink = marks[activeMark - 1]
-        const url = activeLink.getAttribute('data-url')
+        const url = activeLink.getAttribute('href')
         if (!url) return ''
 
         return url
@@ -37,7 +36,6 @@ export default () => {
         const marks = document.querySelectorAll(`[data-context="bookmark"]`)
         dispatch(setDisplayedLink(getMarkUrl(marks)))
         const event = (e: KeyboardEvent) => {
-            
             const { ctrlKey, key } = e
             if (ctrlKey && key === 'Enter' && !dev.devMode) {
                 if (activeMark === bookmarks.length + 1) {
@@ -74,27 +72,34 @@ export default () => {
         }
     }, [activeMark])
 
-
     return (
-        <Reorder.Group
-            axis='x'
-            as="ul"
-            values={bookmarks}
-            onReorder={(e) => console.log(e)}
-            className={styles.bookmarks__list}>
-            <BookmarkList list={bookmarks} activeMark={activeMark} />
-            <li
-                tabIndex={-1}
-                onClick={activate}
+        <DragDropContext
+            onDragEnd={e => dispatch(moveBookmark(e))} 
+        >   
+            <Droppable
+                
+                direction='horizontal'
+                droppableId='BOOKMARKS'
             >
+                {provided => (
+                    <ul
+                        className={styles.bookmarks__list}
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
+                    >
+                        <BookmarkList list={bookmarks} activeMark={activeMark} />
+                        {provided.placeholder}
+                    </ul>
+                )}
+            </Droppable>
                 <Bookmark
                     gen    
+                    onClick={activate}
                     className={[
                         styles.item,
                         activeMark  === bookmarks.length + 1 ? styles.active : ''
                     ].join(' ')}
                 />
-            </li>
-        </Reorder.Group>
+        </DragDropContext>
     )
 }

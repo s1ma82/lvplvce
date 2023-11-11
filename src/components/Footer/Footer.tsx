@@ -3,17 +3,21 @@ import { AuthorLink } from '@components'
 import styles from './styles.module.scss'
 
 export default () => {
-    const [state, setState] = useState<boolean>(false)
+    const [state, setState] = useState<number>(0)
     useEffect(() => {
-        setTimeout(() => setState(true), 5000)
+        setTimeout(() => {
+            setState(1)
+            setTimeout(() => setState(2), 1000)
+        }, 3000)
     }, [])
     return (
         <footer className={styles.footer}>
             <AuthorLink />
             <span
+                style={{display: state === 2 ? 'none' : ''}}
                 className={[
                     styles.docs,
-                    state ? styles.hidden : ''
+                    state === 1 ? styles.hidden : ''
                 ].join(' ')}
             >
                 <div>

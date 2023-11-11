@@ -83,7 +83,7 @@ export default () => {
             ref.current?.focus()
         }
     }
-    
+    useEffect(() => console.log(url), [url])
     return (
         
         <div className={`${styles.modal} ${modal.status ? styles.active : ''}`}>
@@ -102,7 +102,9 @@ export default () => {
                     <div className={styles.image_container}>
                         <Input
                             tabIndex={2}
-                            onChange={e => setImageUrl(e.target.value)}
+                            onChange={e => {
+                                setImageUrl(e.target.value)
+                            }}
                             value={imageFile.name ? imageFile.name : imageUrl}
                             readOnly={!!imageFile.name}
                             name="imageUrl"
@@ -134,7 +136,7 @@ export default () => {
                         tabIndex={4}
                         type="submit"
                         value={modal.type === 'editBookmark' ? 'Edit bookmark': 'Add bookmark'}
-                        status={isUrl(url)}
+                        status={modal.type === 'default' ? isUrl(url) : !!imageUrl}
                     />
                 </form>
             </div>

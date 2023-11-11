@@ -4,7 +4,7 @@ import RootState from '@/types/state'
 import Props from './props'
 import styles from './styles.module.scss'
 
-export default ({ data, gen = false, className }: Props) => {
+export default ({ data, gen = false, className, innerRef, ...props}: Props) => {
     const customStyles = useSelector((state: RootState) => state.customStyles)
     
     if (!data && gen) {
@@ -15,7 +15,9 @@ export default ({ data, gen = false, className }: Props) => {
                     styles[`bookmark_${customStyles.bookmarkSize}`],
                     styles.bookmark_gen,
                     className,
-                ].join(' ')}>
+                ].join(' ')}
+                {...props}
+            >
                 <span className={styles.icon}>
                     ✝
                 </span>
@@ -31,15 +33,17 @@ export default ({ data, gen = false, className }: Props) => {
         return ''
     }
     return (
-        <div  
+        <a   
             className={[
                 styles.bookmark,
                 styles[`bookmark_${customStyles.bookmarkSize}`],
                 data?.imageFile.url || data?.imageUrl ? styles.imageFile : '',
                 className
             ].join(' ')}
+            ref={innerRef}
+            {...props}
         >   
             <img src={getImageUrl()} className={styles.bookmark__image} />
-        </div>
+        </a>
     )
 }
