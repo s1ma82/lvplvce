@@ -24,6 +24,7 @@ export default ({ suggs, activeSugg, setActiveSugg, commandHandler }: SuggsListP
                 return customStyles.bookmarkSize === name
         }
     }
+    
 
     // COMPONENTS
     const SugExtra = ({ extra, index, sugg }: SugExtra) => {

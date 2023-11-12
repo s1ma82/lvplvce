@@ -3,7 +3,7 @@ import isUrl from 'is-url';
 
 import { store } from '@redux/store' 
 import {setDev, setStyle} from '@redux/actions'
-import { googleSearch, ucFirst } from '@futures'
+import { googleSearch, getCustom } from '@futures'
 
 import { EventData } from "./props"
 import styles from './styles.module.scss'
@@ -22,16 +22,15 @@ export default function useHandleEvents(eventData: EventData) {
     } = eventData
 
     
-
-    function setCustomStyle(event: React.ChangeEvent<HTMLInputElement>) {
-        const value = event.target.value
-        const key = 'custom' + ucFirst((dev.custom.split(' ')[1]))
+    
+    function setCustomStyle(value: string) {
+        const key = dev.custom 
+        
         if (key === 'customBackground') {
-            if (dev.custom.length === 0 && !isUrl(value)) return  
-            if (dev.custom.length !== 0 && !isUrl(value)) return dispatch(setStyle([key, '']))
+            if (value.length !== 0 && !isUrl(value)) return dispatch(setStyle([key, '']))
+            const newStyle = [key, value]
+            dispatch(setStyle(newStyle))
         }
-        const newStyle = [key, value]
-        dispatch(setStyle(newStyle))
     }
 
     function getSugg() {
@@ -62,6 +61,7 @@ export default function useHandleEvents(eventData: EventData) {
         e.preventDefault()
 
         if (!dev.devMode) return googleSearch({ value })
+        if (dev.custom) return setCustomStyle(value) 
         commandHandler()
     }
     

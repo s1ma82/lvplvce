@@ -1,13 +1,16 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect } from 'react'
 import isUrl from 'is-url'
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import RootState from '@/types/state'
+import { setStyle } from '../../redux/actions'
 
 export default () => {
     const customStyles =  useSelector((state: RootState) => state.customStyles)
 
 	const customBackground = customStyles.customBackground	
 	const theme = customStyles.theme
+	const dispatch = useDispatch()
+
 	useEffect(() => {
 		const {theme} = customStyles
 		const link = document.getElementById('theme') as HTMLLinkElement
@@ -22,6 +25,7 @@ export default () => {
 		{isUrl(customBackground) ? (
 			<div id='customBackground'>
 				<img
+					onError={e => dispatch(setStyle(['customBackground', '']))}
 					src={customBackground}
 					alt="customBackground"
 					style={{

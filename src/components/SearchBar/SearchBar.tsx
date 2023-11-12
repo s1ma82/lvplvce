@@ -5,6 +5,7 @@ import { Input, Icon } from '@ui'
 import {setDev, setStyle} from '@redux/actions'
 import { suggs as suggsInit} from '@futures'
 import RootState from '@/types/state'
+import { Sugg } from '@/types/Sugg'
 
 import useHandleEvents from './useHandleEvents'
 import DevMenu from './DevMenu'
@@ -16,10 +17,11 @@ export default ({ }) => {
     const [value, setValue] = useState('')
     const [activeSugg, setActiveSugg] = useState([1, 1])
     const [suggs, setSuggs] = useState<SuggsState>([suggsInit, []])
-    const searchBar = useRef<HTMLElement>()
+    const searchBar = useRef<HTMLInputElement>()
 
     const dev = useSelector((state: RootState) => state.dev )
     const modal = useSelector((state: RootState) =>  state.modal )
+    const customStyles = useSelector((state: RootState) =>  state.customStyles )
     const dispatch = useDispatch()
 
 
@@ -44,11 +46,19 @@ export default ({ }) => {
         setCustomStyle
     } = useHandleEvents(eventData)
     
+
+
+    useEffect(() => {
+        if (!dev.custom) return 
+        if (customStyles[dev.custom] && searchBar.current) {
+            setValue(customStyles[dev.custom])
+        }
+    }, [dev.custom])
     useEffect(() => {
         if (!dev.devMode) return
         
         if (!dev.extra) {
-            const newSuggs = suggsInit.filter((i) => {
+            const newSuggs = suggsInit.filter((i: Sugg) => {
                 if(i.name.toLowerCase().includes(value.toLowerCase())) return i
             })
             setSuggs([newSuggs, suggs[1]])
@@ -67,7 +77,8 @@ export default ({ }) => {
         const sugg = suggs[0][activeSugg[0] - 1]
         const isExtra = dev.extra && dev.extra === sugg.name
         
-        if (!isExtra) return
+        if (!isExtra || !sugg.extra) return
+
         const filtered = sugg.extra.filter(extra => {
             if(extra.name.toLowerCase().includes(value.toLowerCase())) return extra
         })
@@ -117,7 +128,7 @@ export default ({ }) => {
                         onKeyDown={breakArrows}
                         onChange={(e) => {
                             setValue(e.target.value)
-                            if(dev.custom) return setCustomStyle(e)
+                            
                         }}
                         className={[
                             styles.searchBar,
