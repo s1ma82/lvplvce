@@ -10,5 +10,13 @@
     position: fixed;
     top: 0;
     width: 100vw;
-    z-index: -999
+    z-index: -999;
+    img{
+        width: calc(100% + 0rem);
+        height: calc(100% + 0rem);
+        left: 0rem;
+        top: 0rem;
+        position: absolute;
+        object-fit: cover;
+    }
 }

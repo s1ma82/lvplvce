@@ -4,7 +4,8 @@ type CustomStylesTypes = {
     theme: typeof themes[number],
     fontSize: string | number,
     bookmarkSize: string,
-    customBackground: string 
+    customBackground: string,
+    logo: ''
 }
 
 export default CustomStylesTypes

@@ -3,7 +3,7 @@ import isUrl from 'is-url'
 import { useDispatch, useSelector } from "react-redux"
 import RootState from '@/types/state'
 import { setStyle } from '../../redux/actions'
-
+import styles from './styles.module.scss'
 export default () => {
     const customStyles =  useSelector((state: RootState) => state.customStyles)
 
@@ -22,20 +22,13 @@ export default () => {
 		
 	}, [customBackground, theme])
 	return (<>
-		{isUrl(customBackground) ? (
-			<div id='customBackground'>
+		{customBackground ? (
+			<div id={styles.customBackground}>
 				<img
 					onError={e => dispatch(setStyle(['customBackground', '']))}
 					src={customBackground}
 					alt="customBackground"
-					style={{
-						width: "calc(100% + 0rem)",
-						height: "calc(100% + 0rem)",
-						left: "0rem",
-						top: "0rem",
-						position: "absolute",
-						objectFit: "cover",
-					}}
+					
 				/>
 			</div> 
 		) : null}

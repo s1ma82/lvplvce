@@ -126,10 +126,7 @@ export default ({ }) => {
                     <Input
                         ref={searchBar}
                         onKeyDown={breakArrows}
-                        onChange={(e) => {
-                            setValue(e.target.value)
-                            
-                        }}
+                        onChange={(e) => setValue(e.target.value)}
                         className={[
                             styles.searchBar,
                         ].join(' ')}

@@ -25,9 +25,8 @@ export default function useHandleEvents(eventData: EventData) {
     
     function setCustomStyle(value: string) {
         const key = dev.custom 
-        
         if (key === 'customBackground') {
-            if (value.length !== 0 && !isUrl(value)) return dispatch(setStyle([key, '']))
+            if (value.length === 0) return dispatch(setStyle([key, '']))
             const newStyle = [key, value]
             dispatch(setStyle(newStyle))
         }
