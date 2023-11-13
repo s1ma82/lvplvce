@@ -1,7 +1,8 @@
-import { setModalActive, setDev, setStyle } from '@redux/actions';
+import { elements } from './../../assets/elements';
+import { setModalActive, setDev, setStyle, toggleHiding } from '@redux/actions';
 import { Dispatch } from "@reduxjs/toolkit"
 import { store } from '@redux/store'
-import { themes, bookmarkSizes } from '@assets';
+import { themes, bookmarkSizes, elements } from '@assets';
 import {Sugg} from '@/types/Sugg';
 
 const dispatch: Dispatch = store.dispatch
@@ -36,19 +37,16 @@ function changeTheme(this: Sugg) {
 function changeBookmarksSize(this: Sugg) {
     dispatch(setStyle(['bookmarkSize', this.name]))
 }
-
-
-
+function toggleDisplayedElement(this: Sugg) {
+    dispatch(toggleHiding(this.name))
+}
 export const suggs: Sugg[] =  [
     {
-        name: 'Theme',
-        icon: 'chat-fill',
-        category: 'theme',
-        command: extraCommand,
-        extra: themes.map((i: string) => ({
-            name: i,
-            command: changeTheme
-        }))
+        name: 'Add bookmark',
+        icon: 'code-slash',
+        category: 'bookmarks',
+        command: () => dispatch(setModalActive(true)),
+        extra: null
     }, 
     {
         name: 'Bookmarks size',
@@ -68,10 +66,23 @@ export const suggs: Sugg[] =  [
         extra: null
     },
     {
-        name: 'Add bookmark',
-        icon: 'code-slash',
-        category: 'bookmarks',
-        command: () => dispatch(setModalActive(true)),
-        extra: null
+        name: 'Displayed elements',
+        icon: 'list',
+        category: 'hidden',
+        command: extraCommand,
+        extra: elements.map((i: typeof elements[number]) => ({
+            name: i,
+            command: toggleDisplayedElement 
+        }))
+    },
+    {
+        name: 'Theme',
+        icon: 'chat-fill',
+        category: 'theme',
+        command: extraCommand,
+        extra: themes.map((i: string) => ({
+            name: i,
+            command: changeTheme
+        }))
     }, 
 ]

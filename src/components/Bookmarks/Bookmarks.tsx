@@ -73,33 +73,35 @@ export default () => {
     }, [activeMark])
 
     return (
-        <DragDropContext
-            onDragEnd={e => dispatch(moveBookmark(e))} 
-        >   
-            <Droppable
-                
-                direction='horizontal'
-                droppableId='BOOKMARKS'
-            >
-                {provided => (
-                    <ul
-                        className={styles.bookmarks__list}
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}
-                    >
-                        <BookmarkList list={bookmarks} activeMark={activeMark} />
-                        {provided.placeholder}
-                    </ul>
-                )}
-            </Droppable>
-            <Bookmark
-                gen    
-                onClick={activate}
-                className={[
-                    styles.item,
-                    activeMark  === bookmarks.length + 1 ? styles.active : ''
-                ].join(' ')}
-            />
-        </DragDropContext>
+        <div className={styles.bookmarks}>
+            <DragDropContext
+                onDragEnd={e => dispatch(moveBookmark(e))} 
+            >   
+                <Droppable
+
+                    direction='horizontal'
+                    droppableId='BOOKMARKS'
+                >
+                    {provided => (
+                        <ul
+                            className={styles.bookmarks__list}
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                        >
+                            <BookmarkList list={bookmarks} activeMark={activeMark} />
+                            {provided.placeholder}
+                        </ul>
+                    )}
+                </Droppable>
+                <Bookmark
+                    gen    
+                    onClick={activate}
+                    className={[
+                        styles.item,
+                        activeMark  === bookmarks.length + 1 ? styles.active : ''
+                    ].join(' ')}
+                />
+            </DragDropContext>
+        </div>
     )
 }

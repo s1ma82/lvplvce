@@ -22,6 +22,8 @@ export default ({ suggs, activeSugg, setActiveSugg, commandHandler }: SuggsListP
                 return customStyles.theme === name
             case "bookmarks":
                 return customStyles.bookmarkSize === name
+            case 'hidden': 
+                return !customStyles.hiddenElements.includes(name)
         }
     }
     

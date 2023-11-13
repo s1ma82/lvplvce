@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react'
-import { AuthorLink } from '@components'
+import { AuthorLink, HideContainer } from '@components'
 import styles from './styles.module.scss'
-
 export default () => {
     const [state, setState] = useState<number>(0)
     useEffect(() => {
@@ -11,7 +10,10 @@ export default () => {
     }, [])
     return (
         <>
-            <AuthorLink />
+            <HideContainer name="author link">
+                <AuthorLink />
+            </HideContainer>
+            <HideContainer name="hints">
             <div
                 className={[
                     styles.docs,
@@ -31,6 +33,7 @@ export default () => {
                     enter bookmark <br /><b>Ctrl + Enter</b>
                 </div>
             </div>
+            </HideContainer>
         </>
     ) 
 }
