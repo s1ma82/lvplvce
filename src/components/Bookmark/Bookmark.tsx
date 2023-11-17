@@ -43,7 +43,9 @@ export default ({ data, gen = false, className, innerRef, ...props}: Props) => {
             ref={innerRef}
             {...props}
         >   
-            <img src={getImageUrl()} className={styles.bookmark__image} />
+            <img
+                src={getImageUrl()}
+                className={styles.bookmark__image} />
         </a>
     )
 }

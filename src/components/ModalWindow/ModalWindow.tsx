@@ -83,7 +83,6 @@ export default () => {
             ref.current?.focus()
         }
     }
-    useEffect(() => console.log(url), [url])
     return (
         
         <div className={`${styles.modal} ${modal.status ? styles.active : ''}`}>

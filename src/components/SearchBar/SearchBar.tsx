@@ -12,6 +12,7 @@ import DevMenu from './DevMenu'
 
 import { SuggsState } from './props'
 import styles from './styles.module.scss'
+import { devFuncs } from './devFuncs'
 
 export default ({ }) => {
     const [value, setValue] = useState('')
@@ -22,6 +23,7 @@ export default ({ }) => {
     const dev = useSelector((state: RootState) => state.dev )
     const modal = useSelector((state: RootState) =>  state.modal )
     const customStyles = useSelector((state: RootState) =>  state.customStyles )
+    const background = useSelector((state: RootState) =>  state.background )
     const dispatch = useDispatch()
 
 
@@ -46,24 +48,40 @@ export default ({ }) => {
         setCustomStyle
     } = useHandleEvents(eventData)
     
-
-
-    useEffect(() => {
-        if (!dev.custom) return 
-        if (customStyles[dev.custom] && searchBar.current) {
-            setValue(customStyles[dev.custom])
+   
+    useEffect(() => { 
+        if (dev.value === '' && dev.devMode) {
+            const [category, id] = dev.devMode.split(':')
+            let newValue = ''
+            switch (category) {
+                case 'customStyles':
+                    newValue = customStyles[id]
+                    break
+                case 'background':
+                    newValue = background[id]
+                    if (dev.extra) newValue = background[id][dev.extra]
+                    break
+            }
+            setValue(newValue)
+            
         }
-    }, [dev.custom])
+        if(dev.value === false) setValue('')
+        devFuncs(dev)
+    }, [dev.value])
+
+
     useEffect(() => {
-        if (!dev.devMode) return
+        if (dev.devMode === false) return
         
-        if (!dev.extra) {
+        if (dev.devMode === '') {
             const newSuggs = suggsInit.filter((i: Sugg) => {
                 if(i.name.toLowerCase().includes(value.toLowerCase())) return i
             })
+            
             setSuggs([newSuggs, suggs[1]])
             setActiveSugg([1, activeSugg[1]])
         } else {
+            if(dev.value !== false) return
             const newExtraSuggs = suggs[0][activeSugg[0] - 1].extra?.filter(i => {
                 if(i.name.toLowerCase().includes(value.toLocaleLowerCase())) return i
             })
@@ -75,16 +93,17 @@ export default ({ }) => {
 
     useEffect(() => {
         const sugg = suggs[0][activeSugg[0] - 1]
-        const isExtra = dev.extra && dev.extra === sugg.name
+
+        const haveExtra = dev.devMode === sugg.id && sugg.extra
         
-        if (!isExtra || !sugg.extra) return
+        if (!haveExtra) return
 
         const filtered = sugg.extra.filter(extra => {
             if(extra.name.toLowerCase().includes(value.toLowerCase())) return extra
         })
         setValue('')
         setSuggs([suggs[0], filtered])
-    }, [dev.extra])
+    }, [dev.devMode])
 
 
     useEffect(() => { 
@@ -96,9 +115,10 @@ export default ({ }) => {
     // input_value handler
 
     useEffect(() => {
-        setValue('')
+        if(dev.value === false) setValue('')
+        
         toggleModMenu.add()
-        if(!dev.devMode) setActiveSugg([1, 1])
+        if(dev.devMode === false) setActiveSugg([1, 1])
         return () => toggleModMenu.remove()
         
     }, [dev.devMode, dev.extra, modal.status])
@@ -113,16 +133,18 @@ export default ({ }) => {
         <form
             className={[
                 styles.form,
-                dev.devMode ? styles.devMode : ''
+                dev.devMode !== false ? styles.devMode : ''
             ].join(' ')}
             onSubmit={handleSubmit}
         >
             <div id="content" className={styles.content}>
-                <div className={[
-                    styles.input_container,
-                    !dev.custom ? styles.noborder : ''
-                ].join(' ')}>
-                    {dev.devMode && !dev.custom ? <Icon name="search" /> : null}
+                <div
+                    className={[
+                        styles.input_container,
+                        dev.value === false ? styles.noborder : ''
+                    ].join(' ')}
+                >
+                    {dev.devMode === ''  ? <Icon name="search" /> : null}
                     <Input
                         ref={searchBar}
                         onKeyDown={breakArrows}
@@ -135,7 +157,7 @@ export default ({ }) => {
                         autoFocus
 		            	autoComplete="off"
 		            	name="searchBar"
-		            	placeholder={dev.custom || "any desire"}
+		            	placeholder={dev.extra || "any desire"}
 		            	type="text"
                     />
                 </div>
@@ -146,7 +168,7 @@ export default ({ }) => {
         <div
             className={[
                 styles.devMode_placeholder,
-                dev.devMode ? styles.active : '',
+                dev.devMode !== false ? styles.active : '',
             ].join(' ')}
         />
     </>)  

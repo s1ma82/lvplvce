@@ -2,15 +2,18 @@ import {enigmaIconsTypes}  from "@/ui/Icon/enigmaIcons"
 import SuggCategoryTypes from "@/types/suggCategoryTypes"
 
 export type Extra = {
+    
     mark?: boolean,
-    name: string,
+    name: string | number,
     command: Function
 }
 
 export type Sugg = {
     name: string,
+    id: string
     icon: enigmaIconsTypes,
     category: SuggCategoryTypes,
     command: Function,
-    extra: Extra[] | null
+    value?: string
+    extra?: Extra[]
 }

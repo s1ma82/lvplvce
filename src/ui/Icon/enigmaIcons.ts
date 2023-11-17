@@ -14,7 +14,14 @@ export const enigmaIcons = {
     "search": "bi bi-search",
     "globe": "bi bi-globe",
     "download": "bi bi-download",
-    "image": "bi bi-image"
+    "image": "bi bi-image-fill",
+    "palette": "bi bi-palette",
+    "palette-fill": "bi bi-palette-fill",
+    "bookmark": "bi bi-bookmark-fill",
+    "bookmark-plus": "bi bi-bookmark-plus",
+    "bookmark-plus-fill": "bi bi-bookmark-plus-fill",
+    "size-plus": "bi bi-arrows-angle-expand"
+
 }
 
 export type enigmaIconsTypes = keyof typeof enigmaIcons

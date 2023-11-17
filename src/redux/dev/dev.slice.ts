@@ -1,10 +1,10 @@
-import getCustom  from '@futures/getCustom';
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import DevTypes from "@/types/DevTypes";
+
 const initialState: DevTypes = {
     devMode: false,
     extra: false,
-    custom: false 
+    value: false 
 }
 
 
@@ -14,12 +14,9 @@ export const dev = createSlice({
     reducers: {
         setDev: (state, { payload }) => {
             if (typeof payload === 'boolean' && !payload) return initialState
-            if (payload.custom) {
-                const newState = {
-                    ...payload,
-                    custom: getCustom(payload.custom)
-                }
-                console.log(newState)
+            if (Object.keys(state) !== Object.keys(payload)) {
+                const copy = current(state)
+                const newState = { ...copy, ...payload }
                 return newState
             }
             return payload

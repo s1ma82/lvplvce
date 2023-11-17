@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
-import isUrl from 'is-url'
 import { useDispatch, useSelector } from "react-redux"
 import RootState from '@/types/state'
-import { setStyle } from '../../redux/actions'
+import { setBgCustom } from '@redux/actions'
 import styles from './styles.module.scss'
 export default () => {
     const customStyles =  useSelector((state: RootState) => state.customStyles)
+    const background =  useSelector((state: RootState) => state.background)
 
-	const customBackground = customStyles.customBackground	
+	const customBackground = background.custom	
 	const theme = customStyles.theme
 	const dispatch = useDispatch()
 
@@ -21,13 +21,25 @@ export default () => {
 		if (!document.body.hidden) return
 		
 	}, [customBackground, theme])
+	const style = {
+		opacity: background.filter.opacity,
+		filter: [
+			`blur(${background.filter.blur}rem)`,
+			`brightness(${background.filter.brightness})`,
+			`saturate(${background.filter.saturation})`,
+		].join(' '),
+		objectFit: background.size === 'max' ? 'fill' : background.size,
+
+	}
+	
 	return (<>
 		{customBackground ? (
 			<div id={styles.customBackground}>
 				<img
-					onError={e => dispatch(setStyle(['customBackground', '']))}
+					onError={e => dispatch(setBgCustom(['custom', '']))}
 					src={customBackground}
 					alt="customBackground"
+					style={style}
 					
 				/>
 			</div> 

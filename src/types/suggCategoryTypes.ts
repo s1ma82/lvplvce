@@ -1,4 +1,4 @@
-const Categoryes = <const>['bookmarks', 'styles', 'hidden', 'theme', 'plugins']
+const Categoryes = <const>['bookmarks', 'customStyles', 'hidden', 'theme', 'plugins', 'background']
 
 type SuggCategory = typeof Categoryes[number]
 export default SuggCategory

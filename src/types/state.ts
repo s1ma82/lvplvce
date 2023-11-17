@@ -1,3 +1,4 @@
+import Background from './BackgroundTypes';
 import CustomStylesTypes from './CustomStylesTypes';
 import ModalTypes from "./ModalTypes"
 import BookmarkTypes from './BookmarkTypes'
@@ -10,7 +11,8 @@ type RootState = {
     customStyles: CustomStylesTypes,
     dev: DevTypes,
     displayedLink: DisplayedLink,
-    extension: boolean 
+    extension: boolean
+    background: Background 
 } 
 export default RootState
 

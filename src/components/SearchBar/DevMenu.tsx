@@ -13,6 +13,7 @@ export default ({ suggs, activeSugg, setActiveSugg, commandHandler }: SuggsListP
     
     const dev = useSelector((state: RootState) => state.dev)
     const customStyles = useSelector((state: RootState) => state.customStyles)
+    const background = useSelector((state: RootState) => state.background)
     
     // FUNCTIONS
     const getMark = (name: string | number, sugg: Sugg) => {
@@ -20,14 +21,22 @@ export default ({ suggs, activeSugg, setActiveSugg, commandHandler }: SuggsListP
         switch (sugg.category) {
             case "theme":
                 return customStyles.theme === name
-            case "bookmarks":
-                return customStyles.bookmarkSize === name
-            case 'hidden': 
-                return !customStyles.hiddenElements.includes(name)
+            case "customStyles":
+                switch (sugg.id) {
+                    case 'bookmarkSize':
+                        return customStyles.bookmarkSize === name
+                    case 'hiddenElements':
+                        return customStyles.hiddenElements.includes(name)
+                    case 'theme':
+                        return customStyles.theme === name
+                    default: return
+                }
+            case 'background':
+                return background.size === name
         }
     }
     
-
+    
     // COMPONENTS
     const SugExtra = ({ extra, index, sugg }: SugExtra) => {
         const mark = getMark(extra.name, sugg)
@@ -50,12 +59,13 @@ export default ({ suggs, activeSugg, setActiveSugg, commandHandler }: SuggsListP
         )
     }
     
-    const SuggExtraMap = () => suggs[1].map((extra, index) => {
-        return <SugExtra
+    const SuggExtraMap = () => {
+        if(dev.value === '' || !suggs[1]) return null
+        return suggs[1].map((extra, index) =><SugExtra
             key={extra.name + index}
             {...{ extra, index, sugg: suggs[0][activeSugg[0] - 1] }}
-        />
-    })
+        />)
+    }
 
     const SuggMap = () => suggs[0].map((sugg: Sugg, index: number) => (
             <li
@@ -80,7 +90,7 @@ export default ({ suggs, activeSugg, setActiveSugg, commandHandler }: SuggsListP
         <div
             className={[
                 styles.suggestions_container,
-                dev.devMode && !dev.custom ? styles.active : ''
+                dev.devMode !== false  ? styles.active : ''
             ].join(' ')}
         >
             <ul
@@ -88,7 +98,7 @@ export default ({ suggs, activeSugg, setActiveSugg, commandHandler }: SuggsListP
                 id="suggsList"
                 className={[
                     styles.suggestions,
-                    !dev.extra ? styles.suggestions_active : ''
+                    dev.devMode === '' ? styles.suggestions_active : ''
                 ].join(' ')}
             >
                 <SuggMap/>   
@@ -99,7 +109,7 @@ export default ({ suggs, activeSugg, setActiveSugg, commandHandler }: SuggsListP
                 className={[
                     styles.suggestions,
                     styles.extra, 
-                    dev.extra ? styles.suggestions_active : ''
+                    dev.devMode ? styles.suggestions_active : ''
                 ].join(' ')}
             >
                 <SuggExtraMap/>

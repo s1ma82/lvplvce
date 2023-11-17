@@ -5,15 +5,14 @@ import CustomStylesTypes from "@/types/CustomStylesTypes";
 const initialLocalState: CustomStylesTypes = {
     theme: 'arch',
     bookmarkSize: 'normal',
-    customBackground: '',
     fontSize: 'normal',
     hiddenElements: []
+
 }
 
 const [localState, setLocalState] = useStorage('customStyles', initialLocalState)
 
 const initialState = localState
-
 
 export const customStyles = createSlice({
     name: 'customStyles',

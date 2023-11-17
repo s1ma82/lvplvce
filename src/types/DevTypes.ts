@@ -1,7 +1,7 @@
 import  CustomStylesTypes from '@/types/CustomStylesTypes'
 type DevTypes = {
-    devMode: boolean,
+    devMode: false | string,
     extra: false | string,
-    custom: false | keyof CustomStylesTypes
+    value: false | string |keyof CustomStylesTypes
 }
 export default DevTypes

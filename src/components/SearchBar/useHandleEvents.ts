@@ -33,9 +33,7 @@ export default function useHandleEvents(eventData: EventData) {
     }
 
     function getSugg() {
-        if (dev.extra) {
-            return suggs[1][activeSugg[1] - 1]
-        }
+        if(dev.devMode) return suggs[1][activeSugg[1] - 1]
         return suggs[0][activeSugg[0] - 1]
     }
 
@@ -51,6 +49,10 @@ export default function useHandleEvents(eventData: EventData) {
     }
 
     function commandHandler() {
+        if(dev.value) return
+        if (dev.devMode && dev.value === '') {
+            return dispatch(setDev({value}))
+        }
         const sugg = getSugg()
         if (!sugg) return
         sugg.command()
@@ -59,8 +61,7 @@ export default function useHandleEvents(eventData: EventData) {
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
 
-        if (!dev.devMode) return googleSearch({ value })
-        if (dev.custom) return setCustomStyle(value) 
+        if (dev.devMode === false) return googleSearch({ value })
         commandHandler()
     }
     
@@ -82,7 +83,7 @@ export default function useHandleEvents(eventData: EventData) {
         event: (e: KeyboardEvent) => {
             const { key } = e
 
-            if (!dev.devMode) return
+            if (dev.devMode === false ) return
 
             let arrow = null
             
@@ -90,7 +91,7 @@ export default function useHandleEvents(eventData: EventData) {
             if(key === 'ArrowUp')   arrow = false 
 
             if (arrow === null) return
-            if (dev.extra) {
+            if (dev.devMode) {
                 let newStatus = arrow ? activeSugg[1] + 1 : activeSugg[1] - 1
                 const breakPoint = suggs[1].length + 1
                 const last = breakPoint - 1 
@@ -114,7 +115,7 @@ export default function useHandleEvents(eventData: EventData) {
         add: () => window.addEventListener('keydown', modMemuNavigation.event),
         remove: () => window.removeEventListener('keydown', modMemuNavigation.event) 
     }
-
+    
     const toggleModMenu = {
         event: (e: any) => {
             function getTrigger() {
@@ -131,21 +132,25 @@ export default function useHandleEvents(eventData: EventData) {
             const modMenuTrigger = getTrigger()
             if (modMenuTrigger.value) e.preventDefault()
             const click = modMenuTrigger.type === 'click'
-            if(!modal.status) searchBar.current?.focus()
+
             if (!click && !modMenuTrigger.value) return
+
+            if(!modal.status) searchBar.current?.focus()
+            
+            if(!click && dev.extra) return dispatch(setDev({extra: false, value: false}))
+            if (!click && dev.devMode) return dispatch(setDev({ devMode: '', value: false }))
+            
             if (
                 click && !modMenuTrigger.value ||
-                !click && dev.devMode && !dev.extra
+                !click && dev.devMode === ''
             ) {
-                // e.preventDefault()
                 return dispatch(setDev(false))
             }
             
             
-            if (!dev.devMode && !modal.status && !click || dev.extra && !click) {
-                if (dev.extra && !click) setValue('')
-                // e.preventDefault()
-                return dispatch(setDev({ devMode: true, extra: false }))
+            if (dev.devMode === false && !modal.status && !click) {
+                setValue('')
+                return dispatch(setDev({ devMode: ''}))
             }
             
         },

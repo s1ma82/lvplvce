@@ -1,11 +1,9 @@
-import { themes } from "@assets/themes"
-import { elements } from "@assets/elements"
+import { elements, themes} from "@assets"
 
 type CustomStylesTypes = {
     theme: typeof themes[number],
     fontSize: string | number,
-    bookmarkSize: string,
-    customBackground: string,
+    bookmarkSize: string
     hiddenElements: Partial<typeof elements>
 }
 

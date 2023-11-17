@@ -37,7 +37,7 @@ export default () => {
         dispatch(setDisplayedLink(getMarkUrl(marks)))
         const event = (e: KeyboardEvent) => {
             const { ctrlKey, key } = e
-            if (ctrlKey && key === 'Enter' && !dev.devMode) {
+            if (ctrlKey && key === 'Enter' && dev.devMode === false) {
                 if (activeMark === bookmarks.length + 1) {
                     dispatch(setModalActive(true))
                     return
@@ -45,7 +45,7 @@ export default () => {
                 location.replace(getMarkUrl(marks))
                 return
             }
-            if (key === 'Delete' && !dev.devMode) {
+            if (key === 'Delete' && dev.devMode === false) {
                 dispatch(removeBookmark(marks[activeMark - 1].getAttribute('data-url')))
                 return
             }

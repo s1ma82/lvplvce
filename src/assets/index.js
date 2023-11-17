@@ -1,3 +1,4 @@
 export {themes} from './themes'
 export { bookmarkSizes } from './bookmarkSizes'
-export {elements} from './elements'
+export { elements } from './elements'
+export {background} from './background'
