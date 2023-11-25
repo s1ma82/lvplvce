@@ -49,9 +49,10 @@ export default function useHandleEvents(eventData: EventData) {
     }
 
     function commandHandler() {
-        if(dev.value) return
         if (dev.devMode && dev.value === '') {
-            return dispatch(setDev({value}))
+            const newDev = {value: value === '' ? 'null' : value}
+            dispatch(setDev(newDev))
+            return
         }
         const sugg = getSugg()
         if (!sugg) return

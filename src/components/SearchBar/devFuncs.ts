@@ -33,5 +33,5 @@ export const devFuncs = (dev) => {
         
         default: return
     }
-    dispatch(setDev({value: false}))
+    dispatch(setDev(false))
 } 
