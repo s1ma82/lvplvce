@@ -48,7 +48,6 @@ export default ({ }) => {
         setCustomStyle
     } = useHandleEvents(eventData)
     
-   
     useEffect(() => { 
         if (dev.value === '' && dev.devMode) {
             const [category, id] = dev.devMode.split(':')
@@ -63,12 +62,10 @@ export default ({ }) => {
                     break
             }
             setValue(newValue)
-            
         }
         if(dev.value === false) setValue('')
         devFuncs(dev)
     }, [dev.value])
-
 
     useEffect(() => {
         if (dev.devMode === false) return
