@@ -55,13 +55,16 @@
     }
 }
 
+
 .suggestions{
     display: none;
     flex-direction: column;
+    overflow-y: scroll;
+    max-height: calc(100vh - 13rem);
     &_active{
         display: flex;
     }
-
+    
     .item{
         font-size: .95em;
         display: flex;

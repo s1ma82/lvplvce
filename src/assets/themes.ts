@@ -1,8 +1,1 @@
-export const themes = [
-    'arch',
-    'bento',
-    'carbon',
-    'trance',
-    'bingsu', 
-    'laser'
-] as const
+export const themes = ["8008","80s_after_dark","9009","aether","alduin","alpine","arch","aurora","beach","bento","bingsu","bliss","blue_dolphin","blueberry_dark","blueberry_light","botanical","breeze","bushido","cafe","camping","carbon","catppuccin","chaos_theory","cheesecake","cherry_blossom","comfy","creamsicle","cyberspace","dark","dark_magic_girl","dark_note","darling","deku","desert_oasis","dev","dino","dmg","dollar","dots","dracula","drowning","dualshot","earthsong","everblush","evil_eye","ez_mode","fire","fledgling","fleuriste","froyo","frozen_llama","fruit_chew","fundamentals","future_funk","godspeed","graen","grape","gruvbox_dark","gruvbox_light","hammerhead","hanok","hedge","honey","horizon","husqy","iceberg_dark","iceberg_light","ishtar","iv_clover","iv_spade","joker","laser","lavender","leather","lil_dragon","lime","magic_girl","mashu","matcha_moccha","material","matrix","menthol","metaverse","metropolis","mexican","miami","miami_nights","milkshake","mint","mizu","modern_dolch","modern_dolch_light","modern_ink","monokai","moonlight","mountain","mr_sleeves","ms_cupcakes","muted","nautilus","nebula","night_runner","nord","nord_light","norse","oblivion","olive","olivia","onedark","our_theme","paper","passion_fruit","pastel","peach_blossom","pink_lemonade","pulse","purpleish","rainbow_trail","red_dragon","red_samurai","repose_dark","repose_light","retro","rgb","rose_pine","rudy","ryujinscales","serika","serika_dark","sewing_tin","sewing_tin_light","shadow","shoko","slambook","snes","soaring_skies","solarized_dark","solarized_light","sonokai","stealth","strawberry","striker","superuser","sweden","taro","terminal","terra","terror_below","tiramisu","trackday","trance","tron_orange","vaporwave","viridescent","voc","vscode","watermelon","wavez","witch_girl"] as const
