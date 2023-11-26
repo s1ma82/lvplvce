@@ -45,7 +45,6 @@ export default ({ }) => {
         commandHandler,
         toggleModMenu,
         modMemuNavigation,
-        setCustomStyle
     } = useHandleEvents(eventData)
     
     useEffect(() => { 
