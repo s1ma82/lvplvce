@@ -4,6 +4,7 @@ import RootState from '@/types/state'
 import { setBgCustom } from '@redux/actions'
 import styles from './styles.module.scss'
 import customTheme from '/public/themes/arch.css?row'
+
 export default () => {
     const customStyles =  useSelector((state: RootState) => state.customStyles)
     const background =  useSelector((state: RootState) => state.background)
@@ -14,11 +15,9 @@ export default () => {
 
 	useEffect(() => {
 		const {theme} = customStyles
-		const link = document.getElementById('theme') as HTMLLinkElement
 		
-		// link.href = `themes/${theme}.css`
 		fetch(
-			`https://raw.githubusercontent.com/s1ma82/lvplvce/master/public/themes/${theme}.css`,
+			`https://raw.githubusercontent.com/s1ma82/lvplvce/themes/themes/${theme}.css`,
 			{cache: 'force-cache'}
 		)
 			.then(r => r.text())
