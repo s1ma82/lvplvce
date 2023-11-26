@@ -9,7 +9,9 @@ import { EventData } from "./props"
 import styles from './styles.module.scss'
 
 export default function useHandleEvents(eventData: EventData) {
-    const {dispatch} = store
+    const { dispatch } = store
+    const suggsContainer = document.getElementById('suggsExtraList')
+    
     const {
         dev,
         setValue,
@@ -23,15 +25,6 @@ export default function useHandleEvents(eventData: EventData) {
 
     
     
-    function setCustomStyle(value: string) {
-        const key = dev.custom 
-        if (key === 'customBackground') {
-            if (value.length === 0) return dispatch(setStyle([key, '']))
-            const newStyle = [key, value]
-            dispatch(setStyle(newStyle))
-        }
-    }
-
     function getSugg() {
         if(dev.devMode) return suggs[1][activeSugg[1] - 1]
         return suggs[0][activeSugg[0] - 1]
@@ -78,7 +71,19 @@ export default function useHandleEvents(eventData: EventData) {
         add: () => window.addEventListener('keydown', focusBarEvent.event),
         remove: () => window.removeEventListener('keydown', focusBarEvent.event) 
     }
+    
+    const middleElementScroll = (newStatus: number) => {
+        if (!suggsContainer) return
+        
+        const containerHeight: number = suggsContainer.clientHeight
+        const middleElement: number = Math.floor(containerHeight / 26 / 2)
+        if (newStatus > middleElement) {
+            suggsContainer.scrollTop = (newStatus - middleElement) * 26
+        } else (
+            suggsContainer.scrollTop = 0
+        )
 
+    }
     const modMemuNavigation = {
 
         event: (e: KeyboardEvent) => {
@@ -99,7 +104,7 @@ export default function useHandleEvents(eventData: EventData) {
 
                 if (newStatus === breakPoint) newStatus = 1
                 if (newStatus === 0) newStatus = last
-
+                middleElementScroll(newStatus)
                 return setActiveSugg([activeSugg[0], newStatus])
             }
 
@@ -172,6 +177,5 @@ export default function useHandleEvents(eventData: EventData) {
         focusBarEvent,
         commandHandler,
         modMemuNavigation,
-        setCustomStyle
     }   
 }

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux"
 import RootState from '@/types/state'
 import { setBgCustom } from '@redux/actions'
 import styles from './styles.module.scss'
-import customTheme from '/public/themes/arch.css?row'
 
 export default () => {
     const customStyles =  useSelector((state: RootState) => state.customStyles)
@@ -47,7 +46,6 @@ export default () => {
 					src={customBackground}
 					alt="customBackground"
 					style={style}
-					
 				/>
 			</div> 
 		) : null}
