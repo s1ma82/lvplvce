@@ -1,4 +1,5 @@
 export {themes} from './themes'
 export { bookmarkSizes } from './bookmarkSizes'
 export { elements } from './elements'
-export {background} from './background'
+export { background } from './background'
+export {customText} from './customText'

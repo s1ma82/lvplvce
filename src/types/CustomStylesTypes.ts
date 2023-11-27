@@ -5,6 +5,7 @@ type CustomStylesTypes = {
     fontSize: string | number,
     bookmarkSize: string
     hiddenElements: Partial<typeof elements>
+    customText: {}
 }
 
 export default CustomStylesTypes

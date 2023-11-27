@@ -47,6 +47,9 @@ export default ({ }) => {
         modMemuNavigation,
     } = useHandleEvents(eventData)
     
+    useEffect(() => {
+        console.log(dev)
+    }, [dev])
     useEffect(() => { 
         if (dev.value === '' && dev.devMode) {
             const [category, id] = dev.devMode.split(':')
@@ -54,6 +57,7 @@ export default ({ }) => {
             switch (category) {
                 case 'customStyles':
                     newValue = customStyles[id]
+                    if (dev.extra) newValue = customStyles[id][dev.extra]
                     break
                 case 'background':
                     newValue = background[id]
@@ -153,7 +157,7 @@ export default ({ }) => {
                         autoFocus
 		            	autoComplete="off"
 		            	name="searchBar"
-		            	placeholder={dev.extra || "any desire"}
+		            	placeholder={dev.extra || customStyles.customText["search bar"]}
 		            	type="text"
                     />
                 </div>
