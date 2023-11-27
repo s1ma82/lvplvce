@@ -1,7 +1,7 @@
-import { setModalActive, setDev, setStyle, toggleHiding } from '@redux/actions';
+import { setModalActive, setDev, setStyle, toggleHiding,  } from '@redux/actions';
 import { Dispatch } from "@reduxjs/toolkit"
 import { store } from '@redux/store'
-import { themes, bookmarkSizes, elements, background } from '@assets';
+import { themes, bookmarkSizes, elements, background, customText} from '@assets';
 import {Extra, Sugg} from '@/types/Sugg';
 
 const dispatch: Dispatch = store.dispatch
@@ -11,16 +11,9 @@ export function suggsFilter(value: string, state: Sugg[]) {
     return state
 }   
 
-function changeTheme(this: Sugg) {
-    dispatch(setStyle(['theme', this.name]))
-}
-
 function toggleHiddenElement(this: Sugg) {
     dispatch(toggleHiding(this.name))
 }
-
-
-
 
 const changeBg = {
     filter: function (this: Extra) {
@@ -30,6 +23,9 @@ const changeBg = {
         dispatch(setDev({value: this.name}))
     }
 }
+function changeCustomText(this: Extra) {
+    dispatch(setDev({extra: this.name, value: ''}))
+} 
 
 function valueCommand(this: Sugg) {
     const {id, category} = this
@@ -70,13 +66,6 @@ export const suggs: Sugg[] =  [
         extra: getMapExtra(bookmarkSizes, changeBg.size)
     },
     {
-        name: 'Custom background',
-        icon: 'image',
-        id: 'custom',
-        category: 'background',
-        command: valueCommand,
-    },
-    {
         name: 'Background filter',
         id: 'filter',
         icon: 'image',
@@ -91,7 +80,13 @@ export const suggs: Sugg[] =  [
         category: 'background',
         command: extraCommand,
         extra: getMapExtra(background.size, changeBg.size) 
-        
+    },
+    {
+        name: 'Custom background',
+        icon: 'image',
+        id: 'custom',
+        category: 'background',
+        command: valueCommand,
     },
     {
         name: 'Hidden elements',
@@ -109,4 +104,12 @@ export const suggs: Sugg[] =  [
         command: extraCommand,
         extra: getMapExtra(themes, defaultCommand)
     }, 
+    {
+        name: 'Custom text',
+        id: 'customText',
+        icon: 'globe',
+        category: 'customStyles',
+        command: extraCommand,
+        extra: getMapExtra(Object.keys(customText), changeCustomText)
+    }        
 ]

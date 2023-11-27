@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import { CustomStyles } from '@components'
@@ -8,7 +8,6 @@ import Main from './pages/Main.page'
 
 import { setExtension } from './redux/extension/extension.slice'
 
-// import './styles/fonts/fonts.css'
 const isExtension = () => {
 	const [proto] = window.origin.split(":")
 	store.dispatch(setExtension(proto === 'chrome-extension'))

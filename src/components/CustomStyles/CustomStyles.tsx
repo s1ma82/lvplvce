@@ -8,13 +8,12 @@ export default () => {
     const customStyles =  useSelector((state: RootState) => state.customStyles)
     const background =  useSelector((state: RootState) => state.background)
 	const [webTheme, setWebTheme] = useState('') 
+	
 	const customBackground = background.custom	
 	const theme = customStyles.theme
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		const {theme} = customStyles
-		
 		fetch(
 			`https://raw.githubusercontent.com/s1ma82/lvplvce/themes/themes/${theme}.css`,
 			{cache: 'force-cache'}

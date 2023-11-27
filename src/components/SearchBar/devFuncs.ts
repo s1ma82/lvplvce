@@ -1,6 +1,6 @@
 import { Dispatch } from "@reduxjs/toolkit"
 import { store } from "@redux/store"
-import { setBgCustom, setBgFilter, setBgSize, setDev, setStyle } from "@redux/actions"
+import { setBgCustom, setBgFilter, setBgSize, setCustomText, setDev, setStyle } from "@redux/actions"
 
 
 const dispatch: Dispatch = store.dispatch
@@ -22,9 +22,12 @@ export const devFuncs = (dev) => {
     switch (category) {
         
         case 'customStyles':
+            if (id === 'customText') {
+                dispatch(setCustomText([dev.extra, dev.value]))
+                break
+            }
             dispatch(setStyle([id, dev.value]))  
             break
-        
         case 'background':
             const action = getBgAction(id)
             if (action === null) break
