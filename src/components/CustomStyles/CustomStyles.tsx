@@ -20,6 +20,7 @@ export default () => {
 		)
 			.then(r => r.text())
 			.then(data => setWebTheme(data))
+			.catch(e => console.error(e.message))
 		
 		if (!document.body.hidden) return
 		

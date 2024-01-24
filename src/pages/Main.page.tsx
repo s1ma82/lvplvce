@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { ReactComponent as Pentagram } from '@assets/pentagram.svg'
+import { ReactComponent as Logo } from '@assets/logo.svg'
 import RootState from '@/types/state'
 import { Bookmarks, SearchBar, DisplayedLink, DownloadExtension, Footer } from '@components'
 import {HideContainer} from '@components'
@@ -9,7 +9,7 @@ export default () => {
 	return (
 		<div className="container">
 			<HideContainer name="logo">
-				<Pentagram id="logo" />
+				<Logo id="logo" fill="var(--caret-color)" />
 			</HideContainer>
 
 			<HideContainer name="title">
