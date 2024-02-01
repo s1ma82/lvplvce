@@ -4,6 +4,9 @@
   "version": "1.0.3",
   "type": "module",
   "scripts": {
+    "test": "echo ",
+    "prebuild": "node ./prebuild.js",
+    "release": "npm run zip; gh release create v$npm_package_version ./lvplvce_$npm_package_version",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
@@ -14,8 +17,10 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "@vercel/analytics": "^1.1.2",
     "bootstrap-icons": "^1.11.1",
     "dedent": "^1.2.0",
+    "dotenv": "^16.4.1",
     "is-url": "^1.2.4",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
@@ -23,7 +28,8 @@
     "react-redux": "^8.0.7",
     "react-router-dom": "^6.11.2",
     "react-svg": "^16.1.22",
-    "use-local-storage": "^3.0.0"
+    "use-local-storage": "^3.0.0",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^5.0.0",
@@ -34,6 +40,7 @@
     "@types/react-redux": "^7.1.25",
     "@vitejs/plugin-react": "^4.0.0",
     "@zerollup/ts-transform-paths": "^1.7.18",
+    "cross-env": "^7.0.3",
     "eslint": "^8.38.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
