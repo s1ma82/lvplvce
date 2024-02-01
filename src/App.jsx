@@ -22,20 +22,18 @@ const ContextMenu = React.lazy(() => import("./components/ContextMenu/ContextMen
 const checkForUpdates = async () => {
   	const response = await fetch('https://api.github.com/repos/s1ma82/lvplvce/releases/latest');
   	const data = await response.json();
-	console.log(data)	
   	const latestVersion = data.tag_name;
   	const currentVersion = chrome.runtime.getManifest().version;
 
-  	if (latestVersion !== currentVersion) {
-  	  // Есть новая версия, выполните необходимые действия для обновления
-  	  chrome.runtime.reload();
+	if (latestVersion !== currentVersion) {
+		console.log("Вышла новая версия")
   	}
 };	
 
-checkForUpdates();
 function App() {
 	useEffect(() => {
 		(async () => {
+			checkForUpdates();
 			await import('./styles/global.css')
 		})().then(() => {
 			document.body.hidden = false
