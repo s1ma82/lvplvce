@@ -25,7 +25,9 @@ const checkForUpdates = async () => {
   	const latestVersion = data.tag_name;
   	const currentVersion = chrome.runtime.getManifest().version;
 
-	if (latestVersion !== currentVersion) {
+	if (latestVersion !== 'v' + currentVersion) {
+		console.log("currentVersion:", currentVersion)
+		console.log("latestVersion:", latestVersion)
 		console.log("Вышла новая версия")
   	}
 };	
