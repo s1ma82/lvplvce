@@ -4,16 +4,13 @@
   "version": "0.1",
   "type": "module",
   "scripts": {
-    "pack-orig": "google-chrome --pack-extension=./lvplvce --pack-extension-key=./privateKey.pem",
-    "pack": "crx3 lvplvce --key ./privateKey.pem",
+    "pack": "crx3 lvplvce --key ./privateKey.pem;",
     "test": "echo ",
-    "prebuild": "node ./prebuild.js",
-    "release": "gh release create v$npm_package_version ./lvplvce.crx --notes",
+    "release": "gh release create v$npm_package_version ./ext.zip --notes",
     "dev": "vite",
     "build": "vite build --out-dir lvplvce",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview --port 2223",
-    "zip": "npm-build-zip --source=./lvplvce",
     "gen": "npx generate-react-cli component",
     "gen:ui": "npx generate-react-cli component --type=ui"
   },
