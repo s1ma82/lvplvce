@@ -5,7 +5,7 @@ import styles from './styles.module.scss'
 
 export default () => {
     const extension = useSelector((state: RootState) => state.extension)
-    return !extension.status ? (
+    return !extension.status && extension.version === null ? (
         <a  
             href={window.EXTENSION_FILE_LINK}
             className={styles.uploadExtension}
