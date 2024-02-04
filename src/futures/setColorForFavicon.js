@@ -1,5 +1,5 @@
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-    fill="var(--color-caret)"
+export const setColorForFavicon = (color) =>`<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+    fill="${color}"
     width="600.000000pt" height="166.6px" viewBox="0 0 600.000000 600.000000"
     preserveAspectRatio="xMidYMid meet">
     <g transform="translate(0.000000,600.000000) scale(0.100000,-0.100000)">
@@ -39,4 +39,4 @@
     -72 -495 -137 -764 -163 l-69 -7 7 29 c18 77 507 1579 576 1770 l12 32 81 4
     c162 6 1320 7 1585 0z"/>
     </g>
-</svg>
+</svg>`

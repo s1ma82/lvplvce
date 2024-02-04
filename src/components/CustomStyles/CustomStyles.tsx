@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import RootState from '@/types/state'
 import { setBgCustom } from '@redux/actions'
 import styles from './styles.module.scss'
+import { setColorForFavicon } from '@futures'
 
 export default () => {
     const customStyles =  useSelector((state: RootState) => state.customStyles)
@@ -11,15 +12,27 @@ export default () => {
 	
 	const customBackground = background.custom	
 	const theme = customStyles.theme
+	
 	const dispatch = useDispatch()
-
 	useEffect(() => {
+		const faviconLink = document.getElementById('favicon')
 		fetch(
 			`https://raw.githubusercontent.com/s1ma82/lvplvce/themes/themes/${theme}.css`,
 			{cache: 'force-cache'}
 		)
 			.then(r => r.text())
-			.then(data => setWebTheme(data))
+			.then(data => {
+				setWebTheme(data)
+				return data
+			})
+			.then(data => {
+				const caretColorRegex = /--caret-color:\s*([^;\n}]+)/;
+				const match = data.match(caretColorRegex);
+				if (!match) return null
+				const base64Svg = btoa(setColorForFavicon(match[1]))
+				faviconLink?.setAttribute('href', `data:image/svg+xml;base64,${base64Svg}`)
+				return data
+			})
 			.catch(e => console.error(e.message))
 		
 		if (!document.body.hidden) return
@@ -41,6 +54,7 @@ export default () => {
 		`}</style>
 		{customBackground ? (
 			<div id={styles.customBackground}>
+				
 				<img
 					onError={e => dispatch(setBgCustom(['custom', '']))}
 					src={customBackground}

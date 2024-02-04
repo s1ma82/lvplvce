@@ -5,3 +5,4 @@ export {setStyle, toggleHiding, setCustomText} from './customStyles/customStyles
 export {setDisplayedLink} from './displayedLink/displayedLink.slice'
 export { setExtension } from './extension/extension.slice'
 export {setBgSize, setBgFilter, setBgCustom} from './background/background.slice'
+export { setLogo } from './logo/logo.slice'

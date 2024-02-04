@@ -1,6 +1,7 @@
 import { Dispatch } from "@reduxjs/toolkit"
 import { store } from "@redux/store"
-import { setBgCustom, setBgFilter, setBgSize, setCustomText, setDev, setStyle } from "@redux/actions"
+import { setBgCustom, setBgFilter, setBgSize, setCustomText, setDev, setStyle, setLogo } from "@redux/actions"
+import DevTypes from "@/types/DevTypes"
 
 
 const dispatch: Dispatch = store.dispatch
@@ -13,7 +14,7 @@ const getBgAction = (id: string) =>{
         default: return null
     }
 }
-export const devFuncs = (dev) => {
+export const devFuncs = (dev: DevTypes) => {
 
     if (!dev.devMode || !dev.value ) return
     
@@ -32,6 +33,10 @@ export const devFuncs = (dev) => {
             const action = getBgAction(id)
             if (action === null) break
             dispatch(action([dev.extra, dev.value]))
+            break
+        case 'logo': 
+            dispatch(setLogo(dev.value))
+            location.reload()
             break
         
         default: return

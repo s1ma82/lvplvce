@@ -1,15 +1,13 @@
 import { useSelector } from 'react-redux'
-import { ReactComponent as Logo } from '@assets/logo.svg'
 import RootState from '@/types/state'
-import { Bookmarks, SearchBar, DisplayedLink, DownloadExtension, Footer } from '@components'
-import {HideContainer} from '@components'
+import {HideContainer, Logo, Bookmarks, SearchBar, DisplayedLink, DownloadExtension, Footer } from '@components'
 
 export default () => {
 	const customStyles = useSelector((state: RootState )=> state.customStyles)
 	return (
 		<div className="container">
 			<HideContainer name="logo">
-				<Logo id="logo" fill="var(--caret-color)" />
+				<Logo/>
 			</HideContainer>
 
 			<HideContainer name="title">

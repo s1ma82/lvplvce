@@ -4,3 +4,4 @@ export {default as googleSearch} from './googleSearch'
 export {suggs, suggsFilter} from './devMenu/suggs'
 export type { Sugg } from './devMenu/Sugg'
 export { default as getCustom } from './getCustom';
+export {setColorForFavicon} from './setColorForFavicon'

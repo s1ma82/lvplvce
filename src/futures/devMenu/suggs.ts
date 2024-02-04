@@ -1,4 +1,4 @@
-import { setModalActive, setDev, setStyle, toggleHiding,  } from '@redux/actions';
+import { setModalActive, setDev, toggleHiding,  } from '@redux/actions';
 import { Dispatch } from "@reduxjs/toolkit"
 import { store } from '@redux/store'
 import { themes, bookmarkSizes, elements, background, customText} from '@assets';
@@ -48,15 +48,14 @@ function getMapExtra(arr: any[], command: Function): Extra[]  {
 function defaultCommand(this: Extra) {
     dispatch(setDev({value: this.name}))
 }
-
-export const suggs: Sugg[] =  [
+export const suggs: Sugg[] = [
     {
         name: 'Add bookmark',
         id: 'addBookmark',
         icon: 'bookmark-plus-fill',
-        category: 'bookmarks', 
+        category: 'bookmarks',
         command: () => dispatch(setModalActive(true)),
-    }, 
+    },
     {
         name: 'Bookmark size',
         icon: 'bookmark',
@@ -79,7 +78,7 @@ export const suggs: Sugg[] =  [
         icon: 'image',
         category: 'background',
         command: extraCommand,
-        extra: getMapExtra(background.size, changeBg.size) 
+        extra: getMapExtra(background.size, changeBg.size)
     },
     {
         name: 'Custom background',
@@ -103,7 +102,7 @@ export const suggs: Sugg[] =  [
         category: 'customStyles',
         command: extraCommand,
         extra: getMapExtra(themes, defaultCommand)
-    }, 
+    },
     {
         name: 'Custom text',
         id: 'customText',
@@ -111,5 +110,14 @@ export const suggs: Sugg[] =  [
         category: 'customStyles',
         command: extraCommand,
         extra: getMapExtra(Object.keys(customText), changeCustomText)
-    }        
-]
+    },
+    {
+        name: 'Custom logo',
+        id: 'custom',
+        icon: 'image',
+        category: 'logo',
+        command: valueCommand,
+    }
+].sort((a, b) => {
+    return a.category.localeCompare(b.category)
+})

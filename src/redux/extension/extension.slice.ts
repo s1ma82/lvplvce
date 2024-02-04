@@ -1,12 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = true
+const initialState = {
+    status: true,
+    version: null
+}
 
 export const extension = createSlice({
     name: 'extension',
     initialState,
     reducers: {
-        setExtension: (state, {payload}) => payload
+        setExtension: (state, { payload }) => {
+            const [status, version] = payload
+            return {status, version}
+        }
     }
 })
 

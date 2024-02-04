@@ -15,11 +15,10 @@ const initialLocalState: Background = {
 const [localState, setLocalState] = useStorage('background', initialLocalState)
 const initialState = localState
 export const backgroundSlice = createSlice({
-    name: 'bookmarks',
+    name: 'background',
     initialState,
     reducers: {
         setBgCustom: (state, { payload }) => {
-            console.log(payload[1])
             state.custom = payload[1]
             setLocalState(state)
         },

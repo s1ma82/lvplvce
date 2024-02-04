@@ -11,8 +11,9 @@ type RootState = {
     customStyles: CustomStylesTypes,
     dev: DevTypes,
     displayedLink: DisplayedLink,
-    extension: boolean
-    background: Background 
+    extension: {status: boolean, version: string | null},
+    background: Background,
+    logo: {custom: string}
 } 
 export default RootState
 

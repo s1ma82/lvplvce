@@ -24,6 +24,7 @@ export default ({ }) => {
     const modal = useSelector((state: RootState) =>  state.modal )
     const customStyles = useSelector((state: RootState) =>  state.customStyles )
     const background = useSelector((state: RootState) =>  state.background )
+    const logo = useSelector((state: RootState) =>  state.logo )
     const dispatch = useDispatch()
 
 
@@ -47,9 +48,6 @@ export default ({ }) => {
         modMemuNavigation,
     } = useHandleEvents(eventData)
     
-    useEffect(() => {
-        console.log(dev)
-    }, [dev])
     useEffect(() => { 
         if (dev.value === '' && dev.devMode) {
             const [category, id] = dev.devMode.split(':')
@@ -62,6 +60,11 @@ export default ({ }) => {
                 case 'background':
                     newValue = background[id]
                     if (dev.extra) newValue = background[id][dev.extra]
+                    break
+                case 'logo':
+                    newValue = logo[id]
+                    console.log(id, 'logo', logo)
+                    if (dev.extra) newValue = logo[id][dev.extra]
                     break
             }
             setValue(newValue)

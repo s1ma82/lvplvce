@@ -6,6 +6,7 @@ import devReducer from './dev/dev.slice'
 import displayedLinkReducer from './displayedLink/displayedLink.slice'
 import extensionReducer from './extension/extension.slice'
 import backgroundReducer from './background/background.slice'
+import logoReducer from './logo/logo.slice'
 export const store = configureStore({
     reducer: {
         modal: modalReducer,
@@ -14,7 +15,8 @@ export const store = configureStore({
         background: backgroundReducer,
         dev: devReducer,
         displayedLink: displayedLinkReducer,
-        extension: extensionReducer
+        extension: extensionReducer,
+        logo: logoReducer
     },
     middleware: getMiddleware => getMiddleware({
         serializableCheck: false
